@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity PricePerProduct.
+    -->
+    <changeSet id="20181127175409-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="product_dish_id"
+                                 baseTableName="price_per_product"
+                                 constraintName="fk_price_per_product_product_dish_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="dishes"/>
+
+        <addForeignKeyConstraint baseColumnNames="product_combo_id"
+                                 baseTableName="price_per_product"
+                                 constraintName="fk_price_per_product_product_combo_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="combos"/>
+
+    </changeSet>
+</databaseChangeLog>

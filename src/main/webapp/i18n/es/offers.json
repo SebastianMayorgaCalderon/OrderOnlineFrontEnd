@@ -1,0 +1,27 @@
+{
+  "orderOnlineFrontEndApp": {
+    "offers": {
+      "home": {
+        "title": "Offers",
+        "createLabel": "Crear nuevo Offers",
+        "createOrEditLabel": "Crear o editar Offers"
+      },
+      "created": "Un nuevo Offers ha sido creado con el identificador {{ param }}",
+      "updated": "Un Offers ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Offers ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Offers {{ id }}?"
+      },
+      "detail": {
+        "title": "Offers"
+      },
+      "name": "Name",
+      "price": "Price",
+      "image": "Image",
+      "restaurant": "Restaurant",
+      "offers": "Offers",
+      "dishes": "Dishes",
+      "combos": "Combos"
+    }
+  }
+}

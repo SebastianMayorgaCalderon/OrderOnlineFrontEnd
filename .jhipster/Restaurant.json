@@ -1,0 +1,61 @@
+{
+    "name": "Restaurant",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "restaurantAdmin",
+            "otherEntityName": "restaurantAdmin",
+            "otherEntityField": "name",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "restaurant"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "category",
+            "otherEntityName": "category",
+            "otherEntityRelationshipName": "restaurant"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "dishes",
+            "otherEntityName": "dishes",
+            "otherEntityRelationshipName": "restaurant"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "orders",
+            "otherEntityName": "orders",
+            "otherEntityRelationshipName": "restaurant"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "combos",
+            "otherEntityName": "combos",
+            "otherEntityRelationshipName": "restaurant"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "offers",
+            "otherEntityName": "offers",
+            "otherEntityRelationshipName": "restaurant"
+        }
+    ],
+    "changelogDate": "20181127175408",
+    "entityTableName": "restaurant",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

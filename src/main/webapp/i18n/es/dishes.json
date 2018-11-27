@@ -1,0 +1,30 @@
+{
+  "orderOnlineFrontEndApp": {
+    "dishes": {
+      "home": {
+        "title": "Dishes",
+        "createLabel": "Crear nuevo Dishes",
+        "createOrEditLabel": "Crear o editar Dishes"
+      },
+      "created": "Un nuevo Dishes ha sido creado con el identificador {{ param }}",
+      "updated": "Un Dishes ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Dishes ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Dishes {{ id }}?"
+      },
+      "detail": {
+        "title": "Dishes"
+      },
+      "name": "Name",
+      "description": "Description",
+      "available": "Available",
+      "image": "Image",
+      "pricePerProduct": "Price Per Product",
+      "combos": "Combos",
+      "offer": "Offer",
+      "restaurant": "Restaurant",
+      "category": "Category",
+      "dishes": "Dishes"
+    }
+  }
+}
