@@ -24,6 +24,7 @@ export class App extends React.Component<IAppProps> {
   componentDidMount() {
     this.props.getSession();
     this.props.getProfile();
+    const a = 22;
   }
 
   render() {
