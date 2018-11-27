@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Dishes.
+    -->
+    <changeSet id="20181127175404-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="dishes_id"
+                                 baseTableName="dishes_combos"
+                                 constraintName="fk_dishes_combos_dishes_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="dishes"/>
+        <addForeignKeyConstraint baseColumnNames="combos_id"
+                                 baseTableName="dishes_combos"
+                                 constraintName="fk_dishes_combos_combos_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="combos"/>
+        
+        <addForeignKeyConstraint baseColumnNames="dishes_id"
+                                 baseTableName="dishes_offer"
+                                 constraintName="fk_dishes_offer_dishes_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="dishes"/>
+        <addForeignKeyConstraint baseColumnNames="offers_id"
+                                 baseTableName="dishes_offer"
+                                 constraintName="fk_dishes_offer_offers_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="offers"/>
+        
+        <addForeignKeyConstraint baseColumnNames="restaurant_id"
+                                 baseTableName="dishes"
+                                 constraintName="fk_dishes_restaurant_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="restaurant"/>
+
+        <addForeignKeyConstraint baseColumnNames="category_id"
+                                 baseTableName="dishes"
+                                 constraintName="fk_dishes_category_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category"/>
+
+        <addForeignKeyConstraint baseColumnNames="dishes_id"
+                                 baseTableName="dishes"
+                                 constraintName="fk_dishes_dishes_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="orders"/>
+
+    </changeSet>
+</databaseChangeLog>
