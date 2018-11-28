@@ -1,0 +1,22 @@
+{
+  "orderOnlineFrontEndApp": {
+    "restaurantAdmin": {
+      "home": {
+        "title": "Restaurant Admins",
+        "createLabel": "Crear nuevo Restaurant Admin",
+        "createOrEditLabel": "Crear o editar Restaurant Admin"
+      },
+      "created": "Un nuevo Restaurant Admin ha sido creado con el identificador {{ param }}",
+      "updated": "Un Restaurant Admin ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Restaurant Admin ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Restaurant Admin {{ id }}?"
+      },
+      "detail": {
+        "title": "Restaurant Admin"
+      },
+      "name": "Name",
+      "user": "User"
+    }
+  }
+}

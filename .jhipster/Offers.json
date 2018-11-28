@@ -1,0 +1,61 @@
+{
+    "name": "Offers",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "price",
+            "fieldType": "Double",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "image",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "restaurant",
+            "otherEntityName": "restaurant",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "offers",
+            "otherEntityName": "orders",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "dishes",
+            "otherEntityName": "dishes",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "offer"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "combos",
+            "otherEntityName": "combos",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "offer"
+        }
+    ],
+    "changelogDate": "20181127175405",
+    "entityTableName": "offers",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}
