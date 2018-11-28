@@ -35,6 +35,10 @@ export class RestaurantAdminDetail extends React.Component<IRestaurantAdminDetai
               </span>
             </dt>
             <dd>{restaurantAdminEntity.name}</dd>
+            <dt>
+              <Translate contentKey="orderOnlineFrontEndApp.restaurantAdmin.user">User</Translate>
+            </dt>
+            <dd>{restaurantAdminEntity.userId ? restaurantAdminEntity.userId : ''}</dd>
           </dl>
           <Button tag={Link} to="/entity/restaurant-admin" replace color="info">
             <FontAwesomeIcon icon="arrow-left" />{' '}

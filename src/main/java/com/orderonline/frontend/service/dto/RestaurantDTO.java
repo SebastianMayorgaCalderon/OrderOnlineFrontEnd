@@ -14,6 +14,8 @@ public class RestaurantDTO implements Serializable {
     @NotNull
     private String name;
 
+    private Integer userID;
+
     private Long restaurantAdminId;
 
     private String restaurantAdminName;
@@ -32,6 +34,14 @@ public class RestaurantDTO implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getUserID() {
+        return userID;
+    }
+
+    public void setUserID(Integer userID) {
+        this.userID = userID;
     }
 
     public Long getRestaurantAdminId() {
@@ -76,6 +86,7 @@ public class RestaurantDTO implements Serializable {
         return "RestaurantDTO{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
+            ", userID=" + getUserID() +
             ", restaurantAdmin=" + getRestaurantAdminId() +
             ", restaurantAdmin='" + getRestaurantAdminName() + "'" +
             "}";

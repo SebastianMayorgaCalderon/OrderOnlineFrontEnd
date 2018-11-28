@@ -44,6 +44,14 @@ import pricePerProduct, {
 import combos, {
   CombosState
 } from 'app/entities/combos/combos.reducer';
+// prettier-ignore
+import restaurantAdmin, {
+  RestaurantAdminState
+} from 'app/entities/restaurant-admin/restaurant-admin.reducer';
+// prettier-ignore
+import restaurant, {
+  RestaurantState
+} from 'app/entities/restaurant/restaurant.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 export interface IRootState {

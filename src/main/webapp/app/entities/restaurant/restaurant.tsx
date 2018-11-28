@@ -70,6 +70,9 @@ export class Restaurant extends React.Component<IRestaurantProps, IRestaurantSta
                 <th className="hand" onClick={this.sort('name')}>
                   <Translate contentKey="orderOnlineFrontEndApp.restaurant.name">Name</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
+                <th className="hand" onClick={this.sort('userID')}>
+                  <Translate contentKey="orderOnlineFrontEndApp.restaurant.userID">User ID</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
                 <th>
                   <Translate contentKey="orderOnlineFrontEndApp.restaurant.restaurantAdmin">Restaurant Admin</Translate>{' '}
                   <FontAwesomeIcon icon="sort" />
@@ -86,6 +89,7 @@ export class Restaurant extends React.Component<IRestaurantProps, IRestaurantSta
                     </Button>
                   </td>
                   <td>{restaurant.name}</td>
+                  <td>{restaurant.userID}</td>
                   <td>
                     {restaurant.restaurantAdminName ? (
                       <Link to={`restaurant-admin/${restaurant.restaurantAdminId}`}>{restaurant.restaurantAdminName}</Link>

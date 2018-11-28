@@ -109,6 +109,12 @@ export class RestaurantUpdate extends React.Component<IRestaurantUpdateProps, IR
                   />
                 </AvGroup>
                 <AvGroup>
+                  <Label id="userIDLabel" for="userID">
+                    <Translate contentKey="orderOnlineFrontEndApp.restaurant.userID">User ID</Translate>
+                  </Label>
+                  <AvField id="restaurant-userID" type="string" className="form-control" name="userID" />
+                </AvGroup>
+                <AvGroup>
                   <Label for="restaurantAdmin.name">
                     <Translate contentKey="orderOnlineFrontEndApp.restaurant.restaurantAdmin">Restaurant Admin</Translate>
                   </Label>

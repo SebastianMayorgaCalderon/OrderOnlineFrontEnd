@@ -15,7 +15,8 @@
       "detail": {
         "title": "Restaurant Admin"
       },
-      "name": "Name"
+      "name": "Name",
+      "user": "User"
     }
   }
 }

@@ -45,6 +45,9 @@ public class RestaurantResourceIntTest {
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
+    private static final Integer DEFAULT_USER_ID = 1;
+    private static final Integer UPDATED_USER_ID = 2;
+
     @Autowired
     private RestaurantRepository restaurantRepository;
 
@@ -89,7 +92,8 @@ public class RestaurantResourceIntTest {
      */
     public static Restaurant createEntity(EntityManager em) {
         Restaurant restaurant = new Restaurant()
-            .name(DEFAULT_NAME);
+            .name(DEFAULT_NAME)
+            .userID(DEFAULT_USER_ID);
         return restaurant;
     }
 
@@ -115,6 +119,7 @@ public class RestaurantResourceIntTest {
         assertThat(restaurantList).hasSize(databaseSizeBeforeCreate + 1);
         Restaurant testRestaurant = restaurantList.get(restaurantList.size() - 1);
         assertThat(testRestaurant.getName()).isEqualTo(DEFAULT_NAME);
+        assertThat(testRestaurant.getUserID()).isEqualTo(DEFAULT_USER_ID);
     }
 
     @Test
@@ -167,7 +172,8 @@ public class RestaurantResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(restaurant.getId().intValue())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
+            .andExpect(jsonPath("$.[*].userID").value(hasItem(DEFAULT_USER_ID)));
     }
     
     @Test
@@ -181,7 +187,8 @@ public class RestaurantResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(restaurant.getId().intValue()))
-            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()));
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
+            .andExpect(jsonPath("$.userID").value(DEFAULT_USER_ID));
     }
 
     @Test
@@ -205,7 +212,8 @@ public class RestaurantResourceIntTest {
         // Disconnect from session so that the updates on updatedRestaurant are not directly saved in db
         em.detach(updatedRestaurant);
         updatedRestaurant
-            .name(UPDATED_NAME);
+            .name(UPDATED_NAME)
+            .userID(UPDATED_USER_ID);
         RestaurantDTO restaurantDTO = restaurantMapper.toDto(updatedRestaurant);
 
         restRestaurantMockMvc.perform(put("/api/restaurants")
@@ -218,6 +226,7 @@ public class RestaurantResourceIntTest {
         assertThat(restaurantList).hasSize(databaseSizeBeforeUpdate);
         Restaurant testRestaurant = restaurantList.get(restaurantList.size() - 1);
         assertThat(testRestaurant.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testRestaurant.getUserID()).isEqualTo(UPDATED_USER_ID);
     }
 
     @Test

@@ -35,6 +35,12 @@ export class RestaurantDetail extends React.Component<IRestaurantDetailProps> {
             </dt>
             <dd>{restaurantEntity.name}</dd>
             <dt>
+              <span id="userID">
+                <Translate contentKey="orderOnlineFrontEndApp.restaurant.userID">User ID</Translate>
+              </span>
+            </dt>
+            <dd>{restaurantEntity.userID}</dd>
+            <dt>
               <Translate contentKey="orderOnlineFrontEndApp.restaurant.restaurantAdmin">Restaurant Admin</Translate>
             </dt>
             <dd>{restaurantEntity.restaurantAdminName ? restaurantEntity.restaurantAdminName : ''}</dd>

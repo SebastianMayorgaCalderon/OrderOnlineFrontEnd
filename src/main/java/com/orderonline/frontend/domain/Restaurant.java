@@ -27,6 +27,9 @@ public class Restaurant implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(name = "user_id")
+    private Integer userID;
+
     @OneToOne    @JoinColumn(unique = true)
     private RestaurantAdmin restaurantAdmin;
 
@@ -60,6 +63,19 @@ public class Restaurant implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getUserID() {
+        return userID;
+    }
+
+    public Restaurant userID(Integer userID) {
+        this.userID = userID;
+        return this;
+    }
+
+    public void setUserID(Integer userID) {
+        this.userID = userID;
     }
 
     public RestaurantAdmin getRestaurantAdmin() {
@@ -226,6 +242,7 @@ public class Restaurant implements Serializable {
         return "Restaurant{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
+            ", userID=" + getUserID() +
             "}";
     }
 }

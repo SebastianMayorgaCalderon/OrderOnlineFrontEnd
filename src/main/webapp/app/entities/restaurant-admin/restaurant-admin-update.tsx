@@ -8,6 +8,8 @@ import { Translate, translate, ICrudGetAction, ICrudGetAllAction, ICrudPutAction
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IRootState } from 'app/shared/reducers';
 
+import { IUser } from 'app/shared/model/user.model';
+import { getUsers } from 'app/modules/administration/user-management/user-management.reducer';
 import { getEntity, updateEntity, createEntity, reset } from './restaurant-admin.reducer';
 import { IRestaurantAdmin } from 'app/shared/model/restaurant-admin.model';
 // tslint:disable-next-line:no-unused-variable
@@ -18,12 +20,14 @@ export interface IRestaurantAdminUpdateProps extends StateProps, DispatchProps, 
 
 export interface IRestaurantAdminUpdateState {
   isNew: boolean;
+  userId: string;
 }
 
 export class RestaurantAdminUpdate extends React.Component<IRestaurantAdminUpdateProps, IRestaurantAdminUpdateState> {
   constructor(props) {
     super(props);
     this.state = {
+      userId: '0',
       isNew: !this.props.match.params || !this.props.match.params.id
     };
   }
@@ -40,6 +44,8 @@ export class RestaurantAdminUpdate extends React.Component<IRestaurantAdminUpdat
     } else {
       this.props.getEntity(this.props.match.params.id);
     }
+
+    this.props.getUsers();
   }
 
   saveEntity = (event, errors, values) => {
@@ -63,7 +69,7 @@ export class RestaurantAdminUpdate extends React.Component<IRestaurantAdminUpdat
   };
 
   render() {
-    const { restaurantAdminEntity, loading, updating } = this.props;
+    const { restaurantAdminEntity, users, loading, updating } = this.props;
     const { isNew } = this.state;
 
     return (
@@ -97,6 +103,21 @@ export class RestaurantAdminUpdate extends React.Component<IRestaurantAdminUpdat
                   </Label>
                   <AvField id="restaurant-admin-name" type="text" name="name" />
                 </AvGroup>
+                <AvGroup>
+                  <Label for="user.id">
+                    <Translate contentKey="orderOnlineFrontEndApp.restaurantAdmin.user">User</Translate>
+                  </Label>
+                  <AvInput id="restaurant-admin-user" type="select" className="form-control" name="userId">
+                    <option value="" key="0" />
+                    {users
+                      ? users.map(otherEntity => (
+                          <option value={otherEntity.id} key={otherEntity.id}>
+                            {otherEntity.id}
+                          </option>
+                        ))
+                      : null}
+                  </AvInput>
+                </AvGroup>
                 <Button tag={Link} id="cancel-save" to="/entity/restaurant-admin" replace color="info">
                   <FontAwesomeIcon icon="arrow-left" />
                   &nbsp;
@@ -120,6 +141,7 @@ export class RestaurantAdminUpdate extends React.Component<IRestaurantAdminUpdat
 }
 
 const mapStateToProps = (storeState: IRootState) => ({
+  users: storeState.userManagement.users,
   restaurantAdminEntity: storeState.restaurantAdmin.entity,
   loading: storeState.restaurantAdmin.loading,
   updating: storeState.restaurantAdmin.updating,
@@ -127,6 +149,7 @@ const mapStateToProps = (storeState: IRootState) => ({
 });
 
 const mapDispatchToProps = {
+  getUsers,
   getEntity,
   updateEntity,
   createEntity,

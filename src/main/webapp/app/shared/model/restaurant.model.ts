@@ -7,6 +7,7 @@ import { IOffers } from 'app/shared/model//offers.model';
 export interface IRestaurant {
   id?: number;
   name?: string;
+  userID?: number;
   restaurantAdminName?: string;
   restaurantAdminId?: number;
   categories?: ICategory[];

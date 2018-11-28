@@ -70,6 +70,9 @@ export class RestaurantAdmin extends React.Component<IRestaurantAdminProps, IRes
                 <th className="hand" onClick={this.sort('name')}>
                   <Translate contentKey="orderOnlineFrontEndApp.restaurantAdmin.name">Name</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
+                <th>
+                  <Translate contentKey="orderOnlineFrontEndApp.restaurantAdmin.user">User</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
                 <th />
               </tr>
             </thead>
@@ -82,6 +85,7 @@ export class RestaurantAdmin extends React.Component<IRestaurantAdminProps, IRes
                     </Button>
                   </td>
                   <td>{restaurantAdmin.name}</td>
+                  <td>{restaurantAdmin.userId ? restaurantAdmin.userId : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${restaurantAdmin.id}`} color="info" size="sm">

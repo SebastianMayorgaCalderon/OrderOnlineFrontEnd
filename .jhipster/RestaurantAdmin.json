@@ -6,7 +6,16 @@
             "fieldType": "String"
         }
     ],
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "restaurantAdmin"
+        }
+    ],
     "changelogDate": "20181127175406",
     "entityTableName": "restaurant_admin",
     "dto": "mapstruct",

@@ -16,6 +16,7 @@
         "title": "Restaurant"
       },
       "name": "Name",
+      "userID": "User ID",
       "restaurantAdmin": "Restaurant Admin",
       "category": "Category",
       "dishes": "Dishes",
