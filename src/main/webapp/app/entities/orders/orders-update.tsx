@@ -158,6 +158,27 @@ export class OrdersUpdate extends React.Component<IOrdersUpdateProps, IOrdersUpd
                   />
                 </AvGroup>
                 <AvGroup>
+                  <Label id="tableNumberLabel" for="tableNumber">
+                    <Translate contentKey="orderOnlineFrontEndApp.orders.tableNumber">Table Number</Translate>
+                  </Label>
+                  <AvField
+                    id="orders-tableNumber"
+                    type="string"
+                    className="form-control"
+                    name="tableNumber"
+                    validate={{
+                      required: { value: true, errorMessage: translate('entity.validation.required') },
+                      number: { value: true, errorMessage: translate('entity.validation.number') }
+                    }}
+                  />
+                </AvGroup>
+                <AvGroup>
+                  <Label id="detailsLabel" for="details">
+                    <Translate contentKey="orderOnlineFrontEndApp.orders.details">Details</Translate>
+                  </Label>
+                  <AvField id="orders-details" type="text" name="details" />
+                </AvGroup>
+                <AvGroup>
                   <Label id="availableLabel" check>
                     <AvInput id="orders-available" type="checkbox" className="form-control" name="available" />
                     <Translate contentKey="orderOnlineFrontEndApp.orders.available">Available</Translate>

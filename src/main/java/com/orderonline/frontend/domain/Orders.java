@@ -42,6 +42,13 @@ public class Orders implements Serializable {
     private Instant date;
 
     @NotNull
+    @Column(name = "table_number", nullable = false)
+    private Integer tableNumber;
+
+    @Column(name = "details")
+    private String details;
+
+    @NotNull
     @Column(name = "available", nullable = false)
     private Boolean available;
 
@@ -114,6 +121,32 @@ public class Orders implements Serializable {
 
     public void setDate(Instant date) {
         this.date = date;
+    }
+
+    public Integer getTableNumber() {
+        return tableNumber;
+    }
+
+    public Orders tableNumber(Integer tableNumber) {
+        this.tableNumber = tableNumber;
+        return this;
+    }
+
+    public void setTableNumber(Integer tableNumber) {
+        this.tableNumber = tableNumber;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public Orders details(String details) {
+        this.details = details;
+        return this;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
     }
 
     public Boolean isAvailable() {
@@ -246,6 +279,8 @@ public class Orders implements Serializable {
             ", subTotalPrice=" + getSubTotalPrice() +
             ", ivi=" + getIvi() +
             ", date='" + getDate() + "'" +
+            ", tableNumber=" + getTableNumber() +
+            ", details='" + getDetails() + "'" +
             ", available='" + isAvailable() + "'" +
             "}";
     }

@@ -88,6 +88,12 @@ export class Orders extends React.Component<IOrdersProps, IOrdersState> {
                 <th className="hand" onClick={this.sort('date')}>
                   <Translate contentKey="orderOnlineFrontEndApp.orders.date">Date</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
+                <th className="hand" onClick={this.sort('tableNumber')}>
+                  <Translate contentKey="orderOnlineFrontEndApp.orders.tableNumber">Table Number</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th className="hand" onClick={this.sort('details')}>
+                  <Translate contentKey="orderOnlineFrontEndApp.orders.details">Details</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
                 <th className="hand" onClick={this.sort('available')}>
                   <Translate contentKey="orderOnlineFrontEndApp.orders.available">Available</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
@@ -111,6 +117,8 @@ export class Orders extends React.Component<IOrdersProps, IOrdersState> {
                   <td>
                     <TextFormat type="date" value={orders.date} format={APP_DATE_FORMAT} />
                   </td>
+                  <td>{orders.tableNumber}</td>
+                  <td>{orders.details}</td>
                   <td>{orders.available ? 'true' : 'false'}</td>
                   <td>{orders.restaurantId ? <Link to={`restaurant/${orders.restaurantId}`}>{orders.restaurantId}</Link> : ''}</td>
                   <td className="text-right">

@@ -55,6 +55,18 @@ export class OrdersDetail extends React.Component<IOrdersDetailProps> {
               <TextFormat value={ordersEntity.date} type="date" format={APP_DATE_FORMAT} />
             </dd>
             <dt>
+              <span id="tableNumber">
+                <Translate contentKey="orderOnlineFrontEndApp.orders.tableNumber">Table Number</Translate>
+              </span>
+            </dt>
+            <dd>{ordersEntity.tableNumber}</dd>
+            <dt>
+              <span id="details">
+                <Translate contentKey="orderOnlineFrontEndApp.orders.details">Details</Translate>
+              </span>
+            </dt>
+            <dd>{ordersEntity.details}</dd>
+            <dt>
               <span id="available">
                 <Translate contentKey="orderOnlineFrontEndApp.orders.available">Available</Translate>
               </span>

@@ -38,6 +38,14 @@
                 <constraints nullable="false" />
             </column>
 
+            <column name="table_number" type="integer">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="details" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
             <column name="available" type="bit">
                 <constraints nullable="false" />
             </column>
