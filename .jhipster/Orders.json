@@ -30,6 +30,17 @@
             ]
         },
         {
+            "fieldName": "tableNumber",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "details",
+            "fieldType": "String"
+        },
+        {
             "fieldName": "available",
             "fieldType": "Boolean",
             "fieldValidateRules": [

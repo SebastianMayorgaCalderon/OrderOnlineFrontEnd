@@ -17,7 +17,6 @@
 
     entity RestaurantAdmin{
         Name String
-
     }
 
     entity Orders{
@@ -25,6 +24,8 @@
         SubTotalPrice Double required
         Ivi Double required
         Date Instant required
+        TableNumber Integer required
+        Details String
         Available Boolean required
     }
     entity Restaurant {

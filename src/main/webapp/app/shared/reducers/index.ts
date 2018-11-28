@@ -52,6 +52,10 @@ import restaurantAdmin, {
 import restaurant, {
   RestaurantState
 } from 'app/entities/restaurant/restaurant.reducer';
+// prettier-ignore
+import orders, {
+  OrdersState
+} from 'app/entities/orders/orders.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 export interface IRootState {
