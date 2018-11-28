@@ -82,4 +82,10 @@ public class RestaurantAdminService {
         log.debug("Request to delete RestaurantAdmin : {}", id);
         restaurantAdminRepository.deleteById(id);
     }
+    public RestaurantAdminDTO toDto(RestaurantAdmin restaurantAdmin){
+        return this.restaurantAdminMapper.toDto(restaurantAdmin);
+    }
+    public RestaurantAdmin toEntity(RestaurantAdminDTO restaurantAdminDTO){
+        return this.restaurantAdminMapper.toEntity(restaurantAdminDTO);
+    }
 }
