@@ -2,12 +2,15 @@ package com.orderonline.frontend.service;
 
 import com.orderonline.frontend.config.Constants;
 import com.orderonline.frontend.domain.Authority;
+import com.orderonline.frontend.domain.RestaurantAdmin;
 import com.orderonline.frontend.domain.User;
 import com.orderonline.frontend.repository.AuthorityRepository;
 import com.orderonline.frontend.repository.UserRepository;
 import com.orderonline.frontend.security.AuthoritiesConstants;
 import com.orderonline.frontend.security.SecurityUtils;
+import com.orderonline.frontend.service.dto.RestaurantAdminDTO;
 import com.orderonline.frontend.service.dto.UserDTO;
+import com.orderonline.frontend.service.mapper.UserMapper;
 import com.orderonline.frontend.service.util.RandomUtil;
 import com.orderonline.frontend.web.rest.errors.*;
 
@@ -37,17 +40,23 @@ public class UserService {
 
     private final UserRepository userRepository;
 
+    private final UserMapper userMapper;
+
+    private final RestaurantAdminService restaurantAdminService;
+
     private final PasswordEncoder passwordEncoder;
 
     private final AuthorityRepository authorityRepository;
 
     private final CacheManager cacheManager;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, CacheManager cacheManager) {
+    public UserService(UserRepository userRepository, RestaurantAdminService restaurantAdminService, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, CacheManager cacheManager, UserMapper userMapper) {
         this.userRepository = userRepository;
+        this.restaurantAdminService = restaurantAdminService;
         this.passwordEncoder = passwordEncoder;
         this.authorityRepository = authorityRepository;
         this.cacheManager = cacheManager;
+        this.userMapper = userMapper;
     }
 
     public Optional<User> activateRegistration(String key) {
@@ -117,9 +126,13 @@ public class UserService {
         Set<Authority> authorities = new HashSet<>();
         authorityRepository.findById(AuthoritiesConstants.USER).ifPresent(authorities::add);
         newUser.setAuthorities(authorities);
-        userRepository.save(newUser);
+        newUser=userRepository.save(newUser);
         this.clearUserCaches(newUser);
         log.debug("Created Information for User: {}", newUser);
+        RestaurantAdminDTO restaurantAdminDTO =  this.restaurantAdminService.toDto(new RestaurantAdmin());
+        restaurantAdminDTO.setUserId(newUser.getId());
+        restaurantAdminDTO.setName(newUser.getLogin());
+        this.restaurantAdminService.save(restaurantAdminDTO);
         return newUser;
     }
     private boolean removeNonActivatedUser(User existingUser){
