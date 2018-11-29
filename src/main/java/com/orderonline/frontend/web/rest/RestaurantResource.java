@@ -131,18 +131,4 @@ public class RestaurantResource {
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 
-    @GetMapping("/create-restaurant")
-    @Timed
-    public void createRestaurantWhenActivating(@RequestParam(value = "key") String key, @RequestParam(value = "restaurantName") String restaurantName) {
-        log.debug("REST request to create restaurant for use with key : {}", key);
-
-        Optional<User> user = this.userService.searchUserByKey(key);
-        if (!user.isPresent()) {
-            throw new InternalServerErrorException("No user was found for this activation key");
-        }
-        if(!this.restaurantService.createRestaurantWhenActivated(key, restaurantName)){
-            throw new InternalServerErrorException("No user was found for this activation key");
-        }
-
-    }
 }

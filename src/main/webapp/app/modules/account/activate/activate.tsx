@@ -43,7 +43,6 @@ export class ActivatePage extends React.Component<IActivateProps> {
   }
   activateAccount = (event, values) => {
     const key = this.state.userkey;
-    debugger;
     this.props.activateAction(key, values.Restaurant);
   };
 

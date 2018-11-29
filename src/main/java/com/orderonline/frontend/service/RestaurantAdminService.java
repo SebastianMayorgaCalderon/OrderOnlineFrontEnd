@@ -73,6 +73,10 @@ public class RestaurantAdminService {
             .map(restaurantAdminMapper::toDto);
     }
 
+    public RestaurantAdmin frinOneByUser(String login) {
+        return this.restaurantAdminRepository.findOneByUserLogin(login).orElse(null);
+    }
+
     /**
      * Delete the restaurantAdmin by id.
      *
