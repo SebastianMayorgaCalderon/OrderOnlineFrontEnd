@@ -176,7 +176,7 @@ export class CombosUpdate extends React.Component<ICombosUpdateProps, ICombosUpd
                     {orders
                       ? orders.map(otherEntity => (
                           <option value={otherEntity.id} key={otherEntity.id}>
-                            {otherEntity.name}
+                            {otherEntity}
                           </option>
                         ))
                       : null}

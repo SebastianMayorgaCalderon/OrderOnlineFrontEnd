@@ -41,10 +41,13 @@ export default (state: ActivateState = initialState, action): ActivateState => {
 };
 
 // Actions
-export const activateAction = key => ({
-  type: ACTION_TYPES.ACTIVATE_ACCOUNT,
-  payload: axios.get('api/activate?key=' + key)
-});
+export const activateAction = (key, restaurantName) => {
+  debugger;
+  return {
+    type: ACTION_TYPES.ACTIVATE_ACCOUNT,
+    payload: axios.get(`api/activate?key=${key}&restaurantName=${restaurantName}`)
+  };
+};
 
 export const reset = () => ({
   type: ACTION_TYPES.RESET

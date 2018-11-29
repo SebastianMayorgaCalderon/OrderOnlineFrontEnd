@@ -9,6 +9,8 @@ import com.orderonline.frontend.service.MailService;
 import com.orderonline.frontend.service.UserService;
 import com.orderonline.frontend.service.dto.PasswordChangeDTO;
 import com.orderonline.frontend.service.dto.UserDTO;
+import com.orderonline.frontend.service.RestaurantService;
+
 import com.orderonline.frontend.web.rest.errors.*;
 import com.orderonline.frontend.web.rest.vm.KeyAndPasswordVM;
 import com.orderonline.frontend.web.rest.vm.ManagedUserVM;
@@ -39,11 +41,14 @@ public class AccountResource {
 
     private final MailService mailService;
 
-    public AccountResource(UserRepository userRepository, UserService userService, MailService mailService) {
+    private final RestaurantService restaurantService;
+
+    public AccountResource(UserRepository userRepository, UserService userService, MailService mailService, RestaurantService restaurantService) {
 
         this.userRepository = userRepository;
         this.userService = userService;
         this.mailService = mailService;
+        this.restaurantService = restaurantService;
     }
 
     /**
@@ -73,9 +78,9 @@ public class AccountResource {
      */
     @GetMapping("/activate")
     @Timed
-    public void activateAccount(@RequestParam(value = "key") String key) {
+    public void activateAccount(@RequestParam(value = "key") String key, @RequestParam(value = "restaurantName") String restaurantName) {
         Optional<User> user = userService.activateRegistration(key);
-        if (!user.isPresent()) {
+        if (!user.isPresent() || !this.restaurantService.createRestaurantWhenActivated(key, restaurantName)) {
             throw new InternalServerErrorException("No user was found for this activation key");
         }
     }

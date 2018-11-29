@@ -279,7 +279,7 @@ export class DishesUpdate extends React.Component<IDishesUpdateProps, IDishesUpd
                     {orders
                       ? orders.map(otherEntity => (
                           <option value={otherEntity.id} key={otherEntity.id}>
-                            {otherEntity.name}
+                            {otherEntity}
                           </option>
                         ))
                       : null}
