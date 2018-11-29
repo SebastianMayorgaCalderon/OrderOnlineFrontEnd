@@ -1,7 +1,10 @@
 package com.orderonline.frontend.service;
 
-import com.orderonline.frontend.domain.Category;
+import com.orderonline.frontend.domain.*;
 import com.orderonline.frontend.repository.CategoryRepository;
+import com.orderonline.frontend.repository.RestaurantAdminRepository;
+import com.orderonline.frontend.repository.UserRepository;
+import com.orderonline.frontend.security.SecurityUtils;
 import com.orderonline.frontend.service.dto.CategoryDTO;
 import com.orderonline.frontend.service.mapper.CategoryMapper;
 import org.slf4j.Logger;
@@ -27,9 +30,12 @@ public class CategoryService {
 
     private final CategoryMapper categoryMapper;
 
-    public CategoryService(CategoryRepository categoryRepository, CategoryMapper categoryMapper) {
+    private final RestaurantService restaurantService;
+
+    public CategoryService(CategoryRepository categoryRepository, CategoryMapper categoryMapper, RestaurantService restaurantService) {
         this.categoryRepository = categoryRepository;
         this.categoryMapper = categoryMapper;
+        this.restaurantService = restaurantService;
     }
 
     /**
@@ -38,10 +44,11 @@ public class CategoryService {
      * @param categoryDTO the entity to save
      * @return the persisted entity
      */
-    public CategoryDTO save(CategoryDTO categoryDTO) {
+    public CategoryDTO save(CategoryDTO categoryDTO, String login) {
         log.debug("Request to save Category : {}", categoryDTO);
-
+        Restaurant restaurant = this.restaurantService.findOneByUser(login);
         Category category = categoryMapper.toEntity(categoryDTO);
+        category.setRestaurant(restaurant);
         category = categoryRepository.save(category);
         return categoryMapper.toDto(category);
     }
@@ -55,7 +62,8 @@ public class CategoryService {
     @Transactional(readOnly = true)
     public Page<CategoryDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Categories");
-        return categoryRepository.findAll(pageable)
+        Restaurant restaurant = this.restaurantService.findOneByUser(SecurityUtils.getCurrentUserLogin().orElse(null));
+        return categoryRepository.findAllByRestaurant(pageable, restaurant  )
             .map(categoryMapper::toDto);
     }
 

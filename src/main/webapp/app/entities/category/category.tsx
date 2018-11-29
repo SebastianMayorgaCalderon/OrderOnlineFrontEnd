@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { IRootState } from 'app/shared/reducers';
 import { getEntities } from './category.reducer';
+import { getSession } from '../../shared/reducers/authentication';
 import { ICategory } from 'app/shared/model/category.model';
 // tslint:disable-next-line:no-unused-variable
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
@@ -23,6 +24,7 @@ export class Category extends React.Component<ICategoryProps, ICategoryState> {
   };
 
   componentDidMount() {
+    this.props.getSession();
     this.getEntities();
   }
 
@@ -52,6 +54,7 @@ export class Category extends React.Component<ICategoryProps, ICategoryState> {
     const { categoryList, match, totalItems } = this.props;
     return (
       <div>
+        {this.props.loggedUser ? JSON.stringify(this.props.loggedUser) : 'llllllllllllllllllllllllll'}
         <h2 id="category-heading">
           <Translate contentKey="orderOnlineFrontEndApp.category.home.title">Categories</Translate>
           <Link to={`${match.url}/new`} className="btn btn-primary float-right jh-create-entity" id="jh-create-entity">
@@ -60,58 +63,50 @@ export class Category extends React.Component<ICategoryProps, ICategoryState> {
             <Translate contentKey="orderOnlineFrontEndApp.category.home.createLabel">Create new Category</Translate>
           </Link>
         </h2>
-        <div className="table-responsive">
-          <Table responsive>
-            <thead>
-              <tr>
-                <th className="hand" onClick={this.sort('id')}>
-                  <Translate contentKey="global.field.id">ID</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={this.sort('name')}>
-                  <Translate contentKey="orderOnlineFrontEndApp.category.name">Name</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th>
-                  <Translate contentKey="orderOnlineFrontEndApp.category.restaurant">Restaurant</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th />
-              </tr>
-            </thead>
-            <tbody>
-              {categoryList.map((category, i) => (
-                <tr key={`entity-${i}`}>
-                  <td>
-                    <Button tag={Link} to={`${match.url}/${category.id}`} color="link" size="sm">
-                      {category.id}
-                    </Button>
-                  </td>
-                  <td>{category.name}</td>
-                  <td>{category.restaurantId ? <Link to={`restaurant/${category.restaurantId}`}>{category.restaurantId}</Link> : ''}</td>
-                  <td className="text-right">
-                    <div className="btn-group flex-btn-group-container">
-                      <Button tag={Link} to={`${match.url}/${category.id}`} color="info" size="sm">
-                        <FontAwesomeIcon icon="eye" />{' '}
-                        <span className="d-none d-md-inline">
-                          <Translate contentKey="entity.action.view">View</Translate>
-                        </span>
-                      </Button>
-                      <Button tag={Link} to={`${match.url}/${category.id}/edit`} color="primary" size="sm">
-                        <FontAwesomeIcon icon="pencil-alt" />{' '}
-                        <span className="d-none d-md-inline">
-                          <Translate contentKey="entity.action.edit">Edit</Translate>
-                        </span>
-                      </Button>
-                      <Button tag={Link} to={`${match.url}/${category.id}/delete`} color="danger" size="sm">
-                        <FontAwesomeIcon icon="trash" />{' '}
-                        <span className="d-none d-md-inline">
-                          <Translate contentKey="entity.action.delete">Delete</Translate>
-                        </span>
-                      </Button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
+        <div className="table-responsive" style={{ overflowX: 'hidden' }}>
+          <Row className="justify-content-center">
+            <Col md="5">
+              <Table striped responsive>
+                <thead>
+                  <tr>
+                    <th className="hand" onClick={this.sort('name')}>
+                      <Translate contentKey="orderOnlineFrontEndApp.category.name">Name</Translate> <FontAwesomeIcon icon="sort" />
+                    </th>
+                    <th className="hand">Controls</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {categoryList.map((category, i) => (
+                    <tr key={`entity-${i}`}>
+                      <td>{category.name}</td>
+                      <td>
+                        <div className="btn-group">
+                          <Button tag={Link} to={`${match.url}/${category.id}`} color="info" size="sm">
+                            <FontAwesomeIcon icon="eye" />{' '}
+                            <span className="d-none d-md-inline">
+                              <Translate contentKey="entity.action.view">View</Translate>
+                            </span>
+                          </Button>
+                          <Button tag={Link} to={`${match.url}/${category.id}/edit`} color="primary" size="sm">
+                            <FontAwesomeIcon icon="pencil-alt" />{' '}
+                            <span className="d-none d-md-inline">
+                              <Translate contentKey="entity.action.edit">Edit</Translate>
+                            </span>
+                          </Button>
+                          <Button tag={Link} to={`${match.url}/${category.id}/delete`} color="danger" size="sm">
+                            <FontAwesomeIcon icon="trash" />{' '}
+                            <span className="d-none d-md-inline">
+                              <Translate contentKey="entity.action.delete">Delete</Translate>
+                            </span>
+                          </Button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            </Col>
+          </Row>
         </div>
         <Row className="justify-content-center">
           <JhiPagination
@@ -126,13 +121,15 @@ export class Category extends React.Component<ICategoryProps, ICategoryState> {
   }
 }
 
-const mapStateToProps = ({ category }: IRootState) => ({
+const mapStateToProps = ({ category, authentication }: IRootState) => ({
   categoryList: category.entities,
-  totalItems: category.totalItems
+  totalItems: category.totalItems,
+  loggedUser: authentication.account
 });
 
 const mapDispatchToProps = {
-  getEntities
+  getEntities,
+  getSession
 };
 
 type StateProps = ReturnType<typeof mapStateToProps>;

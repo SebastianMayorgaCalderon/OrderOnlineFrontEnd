@@ -34,11 +34,14 @@ public class RestaurantService {
 
     private final RestaurantMapper restaurantMapper;
 
-    public RestaurantService(RestaurantRepository restaurantRepository, RestaurantMapper restaurantMapper, UserRepository userRepository, RestaurantAdminRepository restaurantAdminRepository) {
+    private final RestaurantAdminService restaurantAdminService;
+
+    public RestaurantService(RestaurantRepository restaurantRepository, RestaurantMapper restaurantMapper, UserRepository userRepository, RestaurantAdminRepository restaurantAdminRepository, RestaurantAdminService restaurantAdminService) {
         this.restaurantRepository = restaurantRepository;
         this.restaurantMapper = restaurantMapper;
         this.userRepository = userRepository;
         this.restaurantAdminRepository = restaurantAdminRepository;
+        this.restaurantAdminService = restaurantAdminService;
     }
 
     /**
@@ -103,5 +106,9 @@ public class RestaurantService {
             return true;
         }
         return false;
+    }
+    public Restaurant findOneByUser(String login){
+        RestaurantAdmin restaurantAdmin = this.restaurantAdminService.frinOneByUser(login);
+        return this.restaurantRepository.findOneByRestaurantAdmin(restaurantAdmin).orElse(null);
     }
 }

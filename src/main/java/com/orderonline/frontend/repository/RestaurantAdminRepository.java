@@ -13,4 +13,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RestaurantAdminRepository extends JpaRepository<RestaurantAdmin, Long> {
     Optional<RestaurantAdmin> findOneByUserId(Long id);
+    Optional<RestaurantAdmin> findOneByUserLogin(String login);
 }

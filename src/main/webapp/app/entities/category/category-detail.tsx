@@ -34,10 +34,6 @@ export class CategoryDetail extends React.Component<ICategoryDetailProps> {
               </span>
             </dt>
             <dd>{categoryEntity.name}</dd>
-            <dt>
-              <Translate contentKey="orderOnlineFrontEndApp.category.restaurant">Restaurant</Translate>
-            </dt>
-            <dd>{categoryEntity.restaurantId ? categoryEntity.restaurantId : ''}</dd>
           </dl>
           <Button tag={Link} to="/entity/category" replace color="info">
             <FontAwesomeIcon icon="arrow-left" />{' '}
