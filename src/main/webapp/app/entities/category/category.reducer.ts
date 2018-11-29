@@ -117,19 +117,19 @@ export const getEntity: ICrudGetAction<ICategory> = id => {
   };
 };
 
-export const createEntity = (entity, loggedUser) => async dispatch => {
+export const createEntity: ICrudPutAction<ICategory> = entity => async dispatch => {
   const result = await dispatch({
     type: ACTION_TYPES.CREATE_CATEGORY,
-    payload: axios.post(`${apiUrl}?user=${loggedUser.login}`, cleanEntity(entity))
+    payload: axios.post(apiUrl, cleanEntity(entity))
   });
   dispatch(getEntities());
   return result;
 };
 
-export const updateEntity = (entity, loggedUser) => async dispatch => {
+export const updateEntity: ICrudPutAction<ICategory> = entity => async dispatch => {
   const result = await dispatch({
     type: ACTION_TYPES.UPDATE_CATEGORY,
-    payload: axios.put(`${apiUrl}?user=${loggedUser.login}`, cleanEntity(entity))
+    payload: axios.put(apiUrl, cleanEntity(entity))
   });
   dispatch(getEntities());
   return result;

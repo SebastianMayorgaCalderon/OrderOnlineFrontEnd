@@ -56,9 +56,9 @@ export class CategoryUpdate extends React.Component<ICategoryUpdateProps, ICateg
         ...values
       };
       if (this.state.isNew) {
-        this.props.createEntity(entity, this.props.loggedUser);
+        this.props.createEntity(entity);
       } else {
-        this.props.updateEntity(entity, this.props.loggedUser);
+        this.props.updateEntity(entity);
       }
     }
   };

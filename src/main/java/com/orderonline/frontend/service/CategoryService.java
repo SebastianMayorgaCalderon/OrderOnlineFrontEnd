@@ -2,8 +2,6 @@ package com.orderonline.frontend.service;
 
 import com.orderonline.frontend.domain.*;
 import com.orderonline.frontend.repository.CategoryRepository;
-import com.orderonline.frontend.repository.RestaurantAdminRepository;
-import com.orderonline.frontend.repository.UserRepository;
 import com.orderonline.frontend.security.SecurityUtils;
 import com.orderonline.frontend.service.dto.CategoryDTO;
 import com.orderonline.frontend.service.mapper.CategoryMapper;
@@ -44,9 +42,9 @@ public class CategoryService {
      * @param categoryDTO the entity to save
      * @return the persisted entity
      */
-    public CategoryDTO save(CategoryDTO categoryDTO, String login) {
+    public CategoryDTO save(CategoryDTO categoryDTO) {
         log.debug("Request to save Category : {}", categoryDTO);
-        Restaurant restaurant = this.restaurantService.findOneByUser(login);
+        Restaurant restaurant = this.restaurantService.findOneByUser(SecurityUtils.getCurrentUserLogin().orElse(null));
         Category category = categoryMapper.toEntity(categoryDTO);
         category.setRestaurant(restaurant);
         category = categoryRepository.save(category);

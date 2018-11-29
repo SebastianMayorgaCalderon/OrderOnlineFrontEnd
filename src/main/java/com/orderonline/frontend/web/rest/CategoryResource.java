@@ -71,12 +71,12 @@ public class CategoryResource {
      */
     @PutMapping("/categories")
     @Timed
-    public ResponseEntity<CategoryDTO> updateCategory(@Valid @RequestBody CategoryDTO categoryDTO,@RequestParam(value = "user") String user) throws URISyntaxException {
+    public ResponseEntity<CategoryDTO> updateCategory(@Valid @RequestBody CategoryDTO categoryDTO) throws URISyntaxException {
         log.debug("REST request to update Category : {}", categoryDTO);
         if (categoryDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        CategoryDTO result = categoryService.save(categoryDTO,user);
+        CategoryDTO result = categoryService.save(categoryDTO);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, categoryDTO.getId().toString()))
             .body(result);
