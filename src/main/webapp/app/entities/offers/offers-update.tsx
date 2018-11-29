@@ -202,7 +202,7 @@ export class OffersUpdate extends React.Component<IOffersUpdateProps, IOffersUpd
                     {orders
                       ? orders.map(otherEntity => (
                           <option value={otherEntity.id} key={otherEntity.id}>
-                            {otherEntity.name}
+                            {JSON.stringify(otherEntity)}
                           </option>
                         ))
                       : null}

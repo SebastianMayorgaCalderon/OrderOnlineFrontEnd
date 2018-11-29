@@ -1,5 +1,6 @@
 package com.orderonline.frontend.repository;
 
+import java.util.Optional;
 import com.orderonline.frontend.domain.RestaurantAdmin;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
@@ -11,5 +12,5 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings("unused")
 @Repository
 public interface RestaurantAdminRepository extends JpaRepository<RestaurantAdmin, Long> {
-
+    Optional<RestaurantAdmin> findOneByUserId(Long id);
 }

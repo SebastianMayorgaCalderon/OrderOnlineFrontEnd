@@ -5,6 +5,7 @@ import { cleanEntity } from 'app/shared/util/entity-utils';
 import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util';
 
 import { IRestaurant, defaultValue } from 'app/shared/model/restaurant.model';
+import { __await } from 'tslib';
 
 export const ACTION_TYPES = {
   FETCH_RESTAURANT_LIST: 'restaurant/FETCH_RESTAURANT_LIST',
@@ -12,6 +13,7 @@ export const ACTION_TYPES = {
   CREATE_RESTAURANT: 'restaurant/CREATE_RESTAURANT',
   UPDATE_RESTAURANT: 'restaurant/UPDATE_RESTAURANT',
   DELETE_RESTAURANT: 'restaurant/DELETE_RESTAURANT',
+  CREATE_WHEN_ACTIVE_ACCOUNT: 'restaurant/CREATE_WHEN_ACTIVE_ACCOUNT',
   RESET: 'restaurant/RESET'
 };
 
@@ -39,6 +41,7 @@ export default (state: RestaurantState = initialState, action): RestaurantState 
         updateSuccess: false,
         loading: true
       };
+    case REQUEST(ACTION_TYPES.CREATE_WHEN_ACTIVE_ACCOUNT):
     case REQUEST(ACTION_TYPES.CREATE_RESTAURANT):
     case REQUEST(ACTION_TYPES.UPDATE_RESTAURANT):
     case REQUEST(ACTION_TYPES.DELETE_RESTAURANT):
@@ -48,6 +51,7 @@ export default (state: RestaurantState = initialState, action): RestaurantState 
         updateSuccess: false,
         updating: true
       };
+    case FAILURE(ACTION_TYPES.CREATE_WHEN_ACTIVE_ACCOUNT):
     case FAILURE(ACTION_TYPES.FETCH_RESTAURANT_LIST):
     case FAILURE(ACTION_TYPES.FETCH_RESTAURANT):
     case FAILURE(ACTION_TYPES.CREATE_RESTAURANT):
@@ -81,6 +85,7 @@ export default (state: RestaurantState = initialState, action): RestaurantState 
         updateSuccess: true,
         entity: action.payload.data
       };
+    case SUCCESS(ACTION_TYPES.CREATE_WHEN_ACTIVE_ACCOUNT):
     case SUCCESS(ACTION_TYPES.DELETE_RESTAURANT):
       return {
         ...state,
@@ -96,8 +101,8 @@ export default (state: RestaurantState = initialState, action): RestaurantState 
       return state;
   }
 };
-
-const apiUrl = 'api/restaurants';
+const baseApi = 'api';
+const apiUrl = `${baseApi}/restaurants`;
 
 // Actions
 
@@ -148,3 +153,12 @@ export const deleteEntity: ICrudDeleteAction<IRestaurant> = id => async dispatch
 export const reset = () => ({
   type: ACTION_TYPES.RESET
 });
+
+export const createWhenActivate = (key: string, restaurantName: string) => async dispatch => {
+  const requestUrl = `${baseApi}/create-restaurant?key=${key}&restaurantName=${restaurantName}`;
+  const restult = await dispatch({
+    type: ACTION_TYPES.DELETE_RESTAURANT,
+    payload: axios.get(requestUrl)
+  });
+  return restult;
+};
