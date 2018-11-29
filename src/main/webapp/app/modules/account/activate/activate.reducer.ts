@@ -10,8 +10,7 @@ export const ACTION_TYPES = {
 
 const initialState = {
   activationSuccess: false,
-  activationFailure: false,
-  currentUser: null
+  activationFailure: false
 };
 
 export type ActivateState = Readonly<typeof initialState>;
