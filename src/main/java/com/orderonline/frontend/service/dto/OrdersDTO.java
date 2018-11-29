@@ -25,6 +25,11 @@ public class OrdersDTO implements Serializable {
     private Instant date;
 
     @NotNull
+    private Integer tableNumber;
+
+    private String details;
+
+    @NotNull
     private Boolean available;
 
     private Long restaurantId;
@@ -67,6 +72,22 @@ public class OrdersDTO implements Serializable {
 
     public void setDate(Instant date) {
         this.date = date;
+    }
+
+    public Integer getTableNumber() {
+        return tableNumber;
+    }
+
+    public void setTableNumber(Integer tableNumber) {
+        this.tableNumber = tableNumber;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
     }
 
     public Boolean isAvailable() {
@@ -114,6 +135,8 @@ public class OrdersDTO implements Serializable {
             ", subTotalPrice=" + getSubTotalPrice() +
             ", ivi=" + getIvi() +
             ", date='" + getDate() + "'" +
+            ", tableNumber=" + getTableNumber() +
+            ", details='" + getDetails() + "'" +
             ", available='" + isAvailable() + "'" +
             ", restaurant=" + getRestaurantId() +
             "}";

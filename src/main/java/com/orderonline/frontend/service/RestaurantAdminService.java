@@ -73,6 +73,10 @@ public class RestaurantAdminService {
             .map(restaurantAdminMapper::toDto);
     }
 
+    public RestaurantAdmin frinOneByUser(String login) {
+        return this.restaurantAdminRepository.findOneByUserLogin(login).orElse(null);
+    }
+
     /**
      * Delete the restaurantAdmin by id.
      *
@@ -81,5 +85,11 @@ public class RestaurantAdminService {
     public void delete(Long id) {
         log.debug("Request to delete RestaurantAdmin : {}", id);
         restaurantAdminRepository.deleteById(id);
+    }
+    public RestaurantAdminDTO toDto(RestaurantAdmin restaurantAdmin){
+        return this.restaurantAdminMapper.toDto(restaurantAdmin);
+    }
+    public RestaurantAdmin toEntity(RestaurantAdminDTO restaurantAdminDTO){
+        return this.restaurantAdminMapper.toEntity(restaurantAdminDTO);
     }
 }

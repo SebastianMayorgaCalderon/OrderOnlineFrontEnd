@@ -55,7 +55,6 @@ export class CategoryUpdate extends React.Component<ICategoryUpdateProps, ICateg
         ...categoryEntity,
         ...values
       };
-
       if (this.state.isNew) {
         this.props.createEntity(entity);
       } else {
@@ -108,21 +107,6 @@ export class CategoryUpdate extends React.Component<ICategoryUpdateProps, ICateg
                     }}
                   />
                 </AvGroup>
-                <AvGroup>
-                  <Label for="restaurant.id">
-                    <Translate contentKey="orderOnlineFrontEndApp.category.restaurant">Restaurant</Translate>
-                  </Label>
-                  <AvInput id="category-restaurant" type="select" className="form-control" name="restaurantId">
-                    <option value="" key="0" />
-                    {restaurants
-                      ? restaurants.map(otherEntity => (
-                          <option value={otherEntity.id} key={otherEntity.id}>
-                            {otherEntity.id}
-                          </option>
-                        ))
-                      : null}
-                  </AvInput>
-                </AvGroup>
                 <Button tag={Link} id="cancel-save" to="/entity/category" replace color="info">
                   <FontAwesomeIcon icon="arrow-left" />
                   &nbsp;
@@ -150,7 +134,8 @@ const mapStateToProps = (storeState: IRootState) => ({
   categoryEntity: storeState.category.entity,
   loading: storeState.category.loading,
   updating: storeState.category.updating,
-  updateSuccess: storeState.category.updateSuccess
+  updateSuccess: storeState.category.updateSuccess,
+  loggedUser: storeState.authentication.account
 });
 
 const mapDispatchToProps = {

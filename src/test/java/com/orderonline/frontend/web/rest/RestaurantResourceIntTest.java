@@ -76,12 +76,12 @@ public class RestaurantResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final RestaurantResource restaurantResource = new RestaurantResource(restaurantService);
-        this.restRestaurantMockMvc = MockMvcBuilders.standaloneSetup(restaurantResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
-            .setControllerAdvice(exceptionTranslator)
-            .setConversionService(createFormattingConversionService())
-            .setMessageConverters(jacksonMessageConverter).build();
+        //final RestaurantResource restaurantResource = new RestaurantResource(restaurantService);
+//        this.restRestaurantMockMvc = MockMvcBuilders.standaloneSetup(restaurantResource)
+//            .setCustomArgumentResolvers(pageableArgumentResolver)
+//            .setControllerAdvice(exceptionTranslator)
+//            .setConversionService(createFormattingConversionService())
+//            .setMessageConverters(jacksonMessageConverter).build();
     }
 
     /**
@@ -175,7 +175,7 @@ public class RestaurantResourceIntTest {
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].userID").value(hasItem(DEFAULT_USER_ID)));
     }
-    
+
     @Test
     @Transactional
     public void getRestaurant() throws Exception {

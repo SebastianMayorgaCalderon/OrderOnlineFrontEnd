@@ -28,13 +28,14 @@ export class CategoryDeleteDialog extends React.Component<ICategoryDeleteDialogP
 
   render() {
     const { categoryEntity } = this.props;
+
     return (
       <Modal isOpen toggle={this.handleClose}>
         <ModalHeader toggle={this.handleClose}>
           <Translate contentKey="entity.delete.title">Confirm delete operation</Translate>
         </ModalHeader>
         <ModalBody id="orderOnlineFrontEndApp.category.delete.question">
-          <Translate contentKey="orderOnlineFrontEndApp.category.delete.question" interpolate={{ id: categoryEntity.id }}>
+          <Translate contentKey="orderOnlineFrontEndApp.category.delete.question" interpolate={{ id: categoryEntity.name }}>
             Are you sure you want to delete this Category?
           </Translate>
         </ModalBody>

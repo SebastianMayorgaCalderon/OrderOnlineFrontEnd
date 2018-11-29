@@ -56,6 +56,12 @@ public class OrdersResourceIntTest {
     private static final Instant DEFAULT_DATE = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
+    private static final Integer DEFAULT_TABLE_NUMBER = 1;
+    private static final Integer UPDATED_TABLE_NUMBER = 2;
+
+    private static final String DEFAULT_DETAILS = "AAAAAAAAAA";
+    private static final String UPDATED_DETAILS = "BBBBBBBBBB";
+
     private static final Boolean DEFAULT_AVAILABLE = false;
     private static final Boolean UPDATED_AVAILABLE = true;
 
@@ -107,6 +113,8 @@ public class OrdersResourceIntTest {
             .subTotalPrice(DEFAULT_SUB_TOTAL_PRICE)
             .ivi(DEFAULT_IVI)
             .date(DEFAULT_DATE)
+            .tableNumber(DEFAULT_TABLE_NUMBER)
+            .details(DEFAULT_DETAILS)
             .available(DEFAULT_AVAILABLE);
         return orders;
     }
@@ -136,6 +144,8 @@ public class OrdersResourceIntTest {
         assertThat(testOrders.getSubTotalPrice()).isEqualTo(DEFAULT_SUB_TOTAL_PRICE);
         assertThat(testOrders.getIvi()).isEqualTo(DEFAULT_IVI);
         assertThat(testOrders.getDate()).isEqualTo(DEFAULT_DATE);
+        assertThat(testOrders.getTableNumber()).isEqualTo(DEFAULT_TABLE_NUMBER);
+        assertThat(testOrders.getDetails()).isEqualTo(DEFAULT_DETAILS);
         assertThat(testOrders.isAvailable()).isEqualTo(DEFAULT_AVAILABLE);
     }
 
@@ -237,6 +247,25 @@ public class OrdersResourceIntTest {
 
     @Test
     @Transactional
+    public void checkTableNumberIsRequired() throws Exception {
+        int databaseSizeBeforeTest = ordersRepository.findAll().size();
+        // set the field null
+        orders.setTableNumber(null);
+
+        // Create the Orders, which fails.
+        OrdersDTO ordersDTO = ordersMapper.toDto(orders);
+
+        restOrdersMockMvc.perform(post("/api/orders")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(ordersDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Orders> ordersList = ordersRepository.findAll();
+        assertThat(ordersList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void checkAvailableIsRequired() throws Exception {
         int databaseSizeBeforeTest = ordersRepository.findAll().size();
         // set the field null
@@ -269,6 +298,8 @@ public class OrdersResourceIntTest {
             .andExpect(jsonPath("$.[*].subTotalPrice").value(hasItem(DEFAULT_SUB_TOTAL_PRICE.doubleValue())))
             .andExpect(jsonPath("$.[*].ivi").value(hasItem(DEFAULT_IVI.doubleValue())))
             .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
+            .andExpect(jsonPath("$.[*].tableNumber").value(hasItem(DEFAULT_TABLE_NUMBER)))
+            .andExpect(jsonPath("$.[*].details").value(hasItem(DEFAULT_DETAILS.toString())))
             .andExpect(jsonPath("$.[*].available").value(hasItem(DEFAULT_AVAILABLE.booleanValue())));
     }
     
@@ -287,6 +318,8 @@ public class OrdersResourceIntTest {
             .andExpect(jsonPath("$.subTotalPrice").value(DEFAULT_SUB_TOTAL_PRICE.doubleValue()))
             .andExpect(jsonPath("$.ivi").value(DEFAULT_IVI.doubleValue()))
             .andExpect(jsonPath("$.date").value(DEFAULT_DATE.toString()))
+            .andExpect(jsonPath("$.tableNumber").value(DEFAULT_TABLE_NUMBER))
+            .andExpect(jsonPath("$.details").value(DEFAULT_DETAILS.toString()))
             .andExpect(jsonPath("$.available").value(DEFAULT_AVAILABLE.booleanValue()));
     }
 
@@ -315,6 +348,8 @@ public class OrdersResourceIntTest {
             .subTotalPrice(UPDATED_SUB_TOTAL_PRICE)
             .ivi(UPDATED_IVI)
             .date(UPDATED_DATE)
+            .tableNumber(UPDATED_TABLE_NUMBER)
+            .details(UPDATED_DETAILS)
             .available(UPDATED_AVAILABLE);
         OrdersDTO ordersDTO = ordersMapper.toDto(updatedOrders);
 
@@ -331,6 +366,8 @@ public class OrdersResourceIntTest {
         assertThat(testOrders.getSubTotalPrice()).isEqualTo(UPDATED_SUB_TOTAL_PRICE);
         assertThat(testOrders.getIvi()).isEqualTo(UPDATED_IVI);
         assertThat(testOrders.getDate()).isEqualTo(UPDATED_DATE);
+        assertThat(testOrders.getTableNumber()).isEqualTo(UPDATED_TABLE_NUMBER);
+        assertThat(testOrders.getDetails()).isEqualTo(UPDATED_DETAILS);
         assertThat(testOrders.isAvailable()).isEqualTo(UPDATED_AVAILABLE);
     }
 

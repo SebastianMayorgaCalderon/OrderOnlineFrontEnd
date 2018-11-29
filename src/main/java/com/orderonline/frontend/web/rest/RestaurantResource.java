@@ -2,7 +2,10 @@ package com.orderonline.frontend.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.orderonline.frontend.service.RestaurantService;
+import com.orderonline.frontend.domain.*;
+import com.orderonline.frontend.service.UserService;
 import com.orderonline.frontend.web.rest.errors.BadRequestAlertException;
+import com.orderonline.frontend.web.rest.errors.InternalServerErrorException;
 import com.orderonline.frontend.web.rest.util.HeaderUtil;
 import com.orderonline.frontend.web.rest.util.PaginationUtil;
 import com.orderonline.frontend.service.dto.RestaurantDTO;
@@ -36,8 +39,11 @@ public class RestaurantResource {
 
     private final RestaurantService restaurantService;
 
-    public RestaurantResource(RestaurantService restaurantService) {
+    private final UserService userService;
+
+    public RestaurantResource(RestaurantService restaurantService, UserService userService) {
         this.restaurantService = restaurantService;
+        this.userService = userService;
     }
 
     /**
@@ -124,4 +130,5 @@ public class RestaurantResource {
         restaurantService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+
 }

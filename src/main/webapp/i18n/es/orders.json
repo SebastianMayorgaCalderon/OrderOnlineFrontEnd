@@ -19,6 +19,8 @@
       "subTotalPrice": "Sub Total Price",
       "ivi": "Ivi",
       "date": "Date",
+      "tableNumber": "Table Number",
+      "details": "Details",
       "available": "Available",
       "dishes": "Dishes",
       "combos": "Combos",

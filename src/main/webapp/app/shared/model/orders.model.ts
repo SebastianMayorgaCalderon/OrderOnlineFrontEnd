@@ -9,6 +9,8 @@ export interface IOrders {
   subTotalPrice?: number;
   ivi?: number;
   date?: Moment;
+  tableNumber?: number;
+  details?: string;
   available?: boolean;
   dishes?: IDishes[];
   combos?: ICombos[];
