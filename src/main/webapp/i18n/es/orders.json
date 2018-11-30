@@ -1,0 +1,31 @@
+{
+  "orderOnlineFrontEndApp": {
+    "orders": {
+      "home": {
+        "title": "Orders",
+        "createLabel": "Crear nuevo Orders",
+        "createOrEditLabel": "Crear o editar Orders"
+      },
+      "created": "Un nuevo Orders ha sido creado con el identificador {{ param }}",
+      "updated": "Un Orders ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Orders ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Orders {{ id }}?"
+      },
+      "detail": {
+        "title": "Orders"
+      },
+      "totalPrice": "Total Price",
+      "subTotalPrice": "Sub Total Price",
+      "ivi": "Ivi",
+      "date": "Date",
+      "tableNumber": "Table Number",
+      "details": "Details",
+      "available": "Available",
+      "dishes": "Dishes",
+      "combos": "Combos",
+      "offers": "Offers",
+      "restaurant": "Restaurant"
+    }
+  }
+}

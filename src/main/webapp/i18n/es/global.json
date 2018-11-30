@@ -7,6 +7,14 @@
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entidades",
+        "category": "Category",
+        "dishes": "Dishes",
+        "offers": "Offers",
+        "restaurantAdmin": "Restaurant Admin",
+        "orders": "Orders",
+        "restaurant": "Restaurant",
+        "pricePerProduct": "Price Per Product",
+        "combos": "Combos",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

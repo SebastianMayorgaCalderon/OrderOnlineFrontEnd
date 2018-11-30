@@ -1,0 +1,63 @@
+{
+    "name": "Combos",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "available",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "pricePerProduct",
+            "otherEntityName": "pricePerProduct",
+            "otherEntityRelationshipName": "productCombo"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "combos",
+            "relationshipName": "offer",
+            "otherEntityName": "offers",
+            "otherEntityField": "name",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "restaurant",
+            "otherEntityName": "restaurant",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "combos",
+            "otherEntityName": "orders",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "dishes",
+            "otherEntityName": "dishes",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "combos"
+        }
+    ],
+    "changelogDate": "20181127175410",
+    "entityTableName": "combos",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

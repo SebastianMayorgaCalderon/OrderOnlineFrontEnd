@@ -43,5 +43,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Cacheable(cacheNames = USERS_BY_EMAIL_CACHE)
     Optional<User> findOneWithAuthoritiesByEmail(String email);
 
+    User getUserByLogin(String login);
+
     Page<User> findAllByLoginNot(Pageable pageable, String login);
 }

@@ -4,7 +4,8 @@ import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util'
 
 export const ACTION_TYPES = {
   ACTIVATE_ACCOUNT: 'activate/ACTIVATE_ACCOUNT',
-  RESET: 'activate/RESET'
+  RESET: 'activate/RESET',
+  OBTAIN_LOGGED_USER: 'obtain/OBTAIN_LOGGED_USER'
 };
 
 const initialState = {
@@ -41,9 +42,9 @@ export default (state: ActivateState = initialState, action): ActivateState => {
 };
 
 // Actions
-export const activateAction = key => ({
+export const activateAction = (key, restaurantName) => ({
   type: ACTION_TYPES.ACTIVATE_ACCOUNT,
-  payload: axios.get('api/activate?key=' + key)
+  payload: axios.get(`api/activate?key=${key}&restaurantName=${restaurantName}`)
 });
 
 export const reset = () => ({

@@ -1,0 +1,27 @@
+{
+  "orderOnlineFrontEndApp": {
+    "combos": {
+      "home": {
+        "title": "Combos",
+        "createLabel": "Crear nuevo Combos",
+        "createOrEditLabel": "Crear o editar Combos"
+      },
+      "created": "Un nuevo Combos ha sido creado con el identificador {{ param }}",
+      "updated": "Un Combos ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Combos ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Combos {{ id }}?"
+      },
+      "detail": {
+        "title": "Combos"
+      },
+      "name": "Name",
+      "available": "Available",
+      "pricePerProduct": "Price Per Product",
+      "offer": "Offer",
+      "restaurant": "Restaurant",
+      "combos": "Combos",
+      "dishes": "Dishes"
+    }
+  }
+}
