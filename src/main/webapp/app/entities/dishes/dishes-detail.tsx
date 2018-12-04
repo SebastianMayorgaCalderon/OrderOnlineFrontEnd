@@ -25,30 +25,30 @@ export class DishesDetail extends React.Component<IDishesDetailProps> {
       <Row>
         <Col md="8">
           <h2>
-            <Translate contentKey="orderOnlineFrontEndApp.dishes.detail.title">Dishes</Translate> [<b>{dishesEntity.id}</b>]
+            Platillo [<b>{dishesEntity.id}</b>]
           </h2>
           <dl className="jh-entity-details">
             <dt>
               <span id="name">
-                <Translate contentKey="orderOnlineFrontEndApp.dishes.name">Name</Translate>
+                Nombre
               </span>
             </dt>
             <dd>{dishesEntity.name}</dd>
             <dt>
               <span id="description">
-                <Translate contentKey="orderOnlineFrontEndApp.dishes.description">Description</Translate>
+                Descripción
               </span>
             </dt>
             <dd>{dishesEntity.description}</dd>
             <dt>
               <span id="available">
-                <Translate contentKey="orderOnlineFrontEndApp.dishes.available">Available</Translate>
+                Disponible
               </span>
             </dt>
-            <dd>{dishesEntity.available ? 'true' : 'false'}</dd>
+            <dd>{dishesEntity.available ? 'Si' : 'No'}</dd>
             <dt>
               <span id="image">
-                <Translate contentKey="orderOnlineFrontEndApp.dishes.image">Image</Translate>
+                Imagen
               </span>
             </dt>
             <dd>
@@ -65,17 +65,9 @@ export class DishesDetail extends React.Component<IDishesDetailProps> {
               ) : null}
             </dd>
             <dt>
-              <Translate contentKey="orderOnlineFrontEndApp.dishes.restaurant">Restaurant</Translate>
-            </dt>
-            <dd>{dishesEntity.restaurantId ? dishesEntity.restaurantId : ''}</dd>
-            <dt>
-              <Translate contentKey="orderOnlineFrontEndApp.dishes.category">Category</Translate>
+              Categoria
             </dt>
             <dd>{dishesEntity.categoryName ? dishesEntity.categoryName : ''}</dd>
-            <dt>
-              <Translate contentKey="orderOnlineFrontEndApp.dishes.dishes">Dishes</Translate>
-            </dt>
-            <dd>{dishesEntity.dishesName ? dishesEntity.dishesName : ''}</dd>
           </dl>
           <Button tag={Link} to="/entity/dishes" replace color="info">
             <FontAwesomeIcon icon="arrow-left" />{' '}

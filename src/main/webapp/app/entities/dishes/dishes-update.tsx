@@ -127,7 +127,7 @@ export class DishesUpdate extends React.Component<IDishesUpdateProps, IDishesUpd
                 ) : null}
                 <AvGroup>
                   <Label id="nameLabel" for="name">
-                    <Translate contentKey="orderOnlineFrontEndApp.dishes.name">Name</Translate>
+                    <Translate contentKey="orderOnlineFrontEndApp.dishes.name">Nombre</Translate>
                   </Label>
                   <AvField
                     id="dishes-name"
@@ -140,7 +140,7 @@ export class DishesUpdate extends React.Component<IDishesUpdateProps, IDishesUpd
                 </AvGroup>
                 <AvGroup>
                   <Label id="descriptionLabel" for="description">
-                    <Translate contentKey="orderOnlineFrontEndApp.dishes.description">Description</Translate>
+                    <Translate contentKey="orderOnlineFrontEndApp.dishes.description">Descripción</Translate>
                   </Label>
                   <AvField
                     id="dishes-description"
@@ -154,19 +154,19 @@ export class DishesUpdate extends React.Component<IDishesUpdateProps, IDishesUpd
                 <AvGroup>
                   <Label id="availableLabel" check>
                     <AvInput id="dishes-available" type="checkbox" className="form-control" name="available" />
-                    <Translate contentKey="orderOnlineFrontEndApp.dishes.available">Available</Translate>
+                    <Translate contentKey="orderOnlineFrontEndApp.dishes.available">Disponible</Translate>
                   </Label>
                 </AvGroup>
                 <AvGroup>
                   <AvGroup>
                     <Label id="imageLabel" for="image">
-                      <Translate contentKey="orderOnlineFrontEndApp.dishes.image">Image</Translate>
+                      <Translate contentKey="orderOnlineFrontEndApp.dishes.image">Imagen</Translate>
                     </Label>
                     <br />
                     {image ? (
                       <div>
                         <a onClick={openFile(imageContentType, image)}>
-                          <Translate contentKey="entity.action.open">Open</Translate>
+                          <Translate contentKey="entity.action.open">Abrir</Translate>
                         </a>
                         <br />
                         <Row>
@@ -195,23 +195,8 @@ export class DishesUpdate extends React.Component<IDishesUpdateProps, IDishesUpd
                   </AvGroup>
                 </AvGroup>
                 <AvGroup>
-                  <Label for="restaurant.id">
-                    <Translate contentKey="orderOnlineFrontEndApp.dishes.restaurant">Restaurant</Translate>
-                  </Label>
-                  <AvInput id="dishes-restaurant" type="select" className="form-control" name="restaurantId">
-                    <option value="" key="0" />
-                    {restaurants
-                      ? restaurants.map(otherEntity => (
-                          <option value={otherEntity.id} key={otherEntity.id}>
-                            {otherEntity.id}
-                          </option>
-                        ))
-                      : null}
-                  </AvInput>
-                </AvGroup>
-                <AvGroup>
                   <Label for="category.name">
-                    <Translate contentKey="orderOnlineFrontEndApp.dishes.category">Category</Translate>
+                    <Translate contentKey="orderOnlineFrontEndApp.dishes.category">Categoría a la que pertenece:</Translate>
                   </Label>
                   <AvInput id="dishes-category" type="select" className="form-control" name="categoryId">
                     <option value="" key="0" />
@@ -219,21 +204,6 @@ export class DishesUpdate extends React.Component<IDishesUpdateProps, IDishesUpd
                       ? categories.map(otherEntity => (
                           <option value={otherEntity.id} key={otherEntity.id}>
                             {otherEntity.name}
-                          </option>
-                        ))
-                      : null}
-                  </AvInput>
-                </AvGroup>
-                <AvGroup>
-                  <Label for="dishes.name">
-                    <Translate contentKey="orderOnlineFrontEndApp.dishes.dishes">Dishes</Translate>
-                  </Label>
-                  <AvInput id="dishes-dishes" type="select" className="form-control" name="dishesId">
-                    <option value="" key="0" />
-                    {orders
-                      ? orders.map(otherEntity => (
-                          <option value={otherEntity.id} key={otherEntity.id}>
-                            {JSON.stringify(otherEntity)}
                           </option>
                         ))
                       : null}

@@ -1,5 +1,6 @@
 package com.orderonline.frontend.repository;
 
+import com.orderonline.frontend.domain.Restaurant;
 import com.orderonline.frontend.domain.Offers;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,4 +28,5 @@ public interface OffersRepository extends JpaRepository<Offers, Long> {
     @Query("select offers from Offers offers left join fetch offers.dishes left join fetch offers.combos where offers.id =:id")
     Optional<Offers> findOneWithEagerRelationships(@Param("id") Long id);
 
+    Page<Offers> findAllByRestaurant(Pageable pageable, Restaurant restaurant);
 }
