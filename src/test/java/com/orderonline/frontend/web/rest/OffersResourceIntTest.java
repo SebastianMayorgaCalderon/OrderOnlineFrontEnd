@@ -12,9 +12,12 @@ import com.orderonline.frontend.web.rest.errors.ExceptionTranslator;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -25,12 +28,14 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Base64Utils;
 
 import javax.persistence.EntityManager;
+import java.util.ArrayList;
 import java.util.List;
 
 
 import static com.orderonline.frontend.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -57,8 +62,14 @@ public class OffersResourceIntTest {
     @Autowired
     private OffersRepository offersRepository;
 
+    @Mock
+    private OffersRepository offersRepositoryMock;
+
     @Autowired
     private OffersMapper offersMapper;
+
+    @Mock
+    private OffersService offersServiceMock;
 
     @Autowired
     private OffersService offersService;
@@ -207,6 +218,39 @@ public class OffersResourceIntTest {
             .andExpect(jsonPath("$.[*].image").value(hasItem(Base64Utils.encodeToString(DEFAULT_IMAGE))));
     }
     
+    @SuppressWarnings({"unchecked"})
+    public void getAllOffersWithEagerRelationshipsIsEnabled() throws Exception {
+        OffersResource offersResource = new OffersResource(offersServiceMock);
+        when(offersServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        MockMvc restOffersMockMvc = MockMvcBuilders.standaloneSetup(offersResource)
+            .setCustomArgumentResolvers(pageableArgumentResolver)
+            .setControllerAdvice(exceptionTranslator)
+            .setConversionService(createFormattingConversionService())
+            .setMessageConverters(jacksonMessageConverter).build();
+
+        restOffersMockMvc.perform(get("/api/offers?eagerload=true"))
+        .andExpect(status().isOk());
+
+        verify(offersServiceMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
+    @SuppressWarnings({"unchecked"})
+    public void getAllOffersWithEagerRelationshipsIsNotEnabled() throws Exception {
+        OffersResource offersResource = new OffersResource(offersServiceMock);
+            when(offersServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+            MockMvc restOffersMockMvc = MockMvcBuilders.standaloneSetup(offersResource)
+            .setCustomArgumentResolvers(pageableArgumentResolver)
+            .setControllerAdvice(exceptionTranslator)
+            .setConversionService(createFormattingConversionService())
+            .setMessageConverters(jacksonMessageConverter).build();
+
+        restOffersMockMvc.perform(get("/api/offers?eagerload=true"))
+        .andExpect(status().isOk());
+
+            verify(offersServiceMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
     @Test
     @Transactional
     public void getOffers() throws Exception {

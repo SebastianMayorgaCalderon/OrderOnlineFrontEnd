@@ -8,14 +8,14 @@ import { Translate, translate, ICrudGetAction, ICrudGetAllAction, setFileData, o
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IRootState } from 'app/shared/reducers';
 
-import { IRestaurant } from 'app/shared/model/restaurant.model';
-import { getEntities as getRestaurants } from 'app/entities/restaurant/restaurant.reducer';
-import { IOrders } from 'app/shared/model/orders.model';
-import { getEntities as getOrders } from 'app/entities/orders/orders.reducer';
 import { IDishes } from 'app/shared/model/dishes.model';
 import { getEntities as getDishes } from 'app/entities/dishes/dishes.reducer';
 import { ICombos } from 'app/shared/model/combos.model';
 import { getEntities as getCombos } from 'app/entities/combos/combos.reducer';
+import { IRestaurant } from 'app/shared/model/restaurant.model';
+import { getEntities as getRestaurants } from 'app/entities/restaurant/restaurant.reducer';
+import { IOrders } from 'app/shared/model/orders.model';
+import { getEntities as getOrders } from 'app/entities/orders/orders.reducer';
 import { getEntity, updateEntity, createEntity, setBlob, reset } from './offers.reducer';
 import { IOffers } from 'app/shared/model/offers.model';
 // tslint:disable-next-line:no-unused-variable
@@ -26,20 +26,20 @@ export interface IOffersUpdateProps extends StateProps, DispatchProps, RouteComp
 
 export interface IOffersUpdateState {
   isNew: boolean;
+  idsdishes: any[];
+  idscombos: any[];
   restaurantId: string;
   offersId: string;
-  dishesId: string;
-  combosId: string;
 }
 
 export class OffersUpdate extends React.Component<IOffersUpdateProps, IOffersUpdateState> {
   constructor(props) {
     super(props);
     this.state = {
+      idsdishes: [],
+      idscombos: [],
       restaurantId: '0',
       offersId: '0',
-      dishesId: '0',
-      combosId: '0',
       isNew: !this.props.match.params || !this.props.match.params.id
     };
   }
@@ -57,10 +57,10 @@ export class OffersUpdate extends React.Component<IOffersUpdateProps, IOffersUpd
       this.props.getEntity(this.props.match.params.id);
     }
 
-    this.props.getRestaurants();
-    this.props.getOrders();
     this.props.getDishes();
     this.props.getCombos();
+    this.props.getRestaurants();
+    this.props.getOrders();
   }
 
   onBlobChange = (isAnImage, name) => event => {
@@ -76,7 +76,9 @@ export class OffersUpdate extends React.Component<IOffersUpdateProps, IOffersUpd
       const { offersEntity } = this.props;
       const entity = {
         ...offersEntity,
-        ...values
+        ...values,
+        dishes: mapIdList(values.dishes),
+        combos: mapIdList(values.combos)
       };
 
       if (this.state.isNew) {
@@ -92,7 +94,7 @@ export class OffersUpdate extends React.Component<IOffersUpdateProps, IOffersUpd
   };
 
   render() {
-    const { offersEntity, restaurants, orders, dishes, combos, loading, updating } = this.props;
+    const { offersEntity, dishes, combos, restaurants, orders, loading, updating } = this.props;
     const { isNew } = this.state;
 
     const { image, imageContentType } = offersEntity;
@@ -179,6 +181,50 @@ export class OffersUpdate extends React.Component<IOffersUpdateProps, IOffersUpd
                   </AvGroup>
                 </AvGroup>
                 <AvGroup>
+                  <Label for="dishes">
+                    <Translate contentKey="orderOnlineFrontEndApp.offers.dishes">Dishes</Translate>
+                  </Label>
+                  <AvInput
+                    id="offers-dishes"
+                    type="select"
+                    multiple
+                    className="form-control"
+                    name="dishes"
+                    value={offersEntity.dishes && offersEntity.dishes.map(e => e.id)}
+                  >
+                    <option value="" key="0" />
+                    {dishes
+                      ? dishes.map(otherEntity => (
+                          <option value={otherEntity.id} key={otherEntity.id}>
+                            {otherEntity.name}
+                          </option>
+                        ))
+                      : null}
+                  </AvInput>
+                </AvGroup>
+                <AvGroup>
+                  <Label for="combos">
+                    <Translate contentKey="orderOnlineFrontEndApp.offers.combos">Combos</Translate>
+                  </Label>
+                  <AvInput
+                    id="offers-combos"
+                    type="select"
+                    multiple
+                    className="form-control"
+                    name="combos"
+                    value={offersEntity.combos && offersEntity.combos.map(e => e.id)}
+                  >
+                    <option value="" key="0" />
+                    {combos
+                      ? combos.map(otherEntity => (
+                          <option value={otherEntity.id} key={otherEntity.id}>
+                            {otherEntity.name}
+                          </option>
+                        ))
+                      : null}
+                  </AvInput>
+                </AvGroup>
+                <AvGroup>
                   <Label for="restaurant.id">
                     <Translate contentKey="orderOnlineFrontEndApp.offers.restaurant">Restaurant</Translate>
                   </Label>
@@ -231,10 +277,10 @@ export class OffersUpdate extends React.Component<IOffersUpdateProps, IOffersUpd
 }
 
 const mapStateToProps = (storeState: IRootState) => ({
-  restaurants: storeState.restaurant.entities,
-  orders: storeState.orders.entities,
   dishes: storeState.dishes.entities,
   combos: storeState.combos.entities,
+  restaurants: storeState.restaurant.entities,
+  orders: storeState.orders.entities,
   offersEntity: storeState.offers.entity,
   loading: storeState.offers.loading,
   updating: storeState.offers.updating,
@@ -242,10 +288,10 @@ const mapStateToProps = (storeState: IRootState) => ({
 });
 
 const mapDispatchToProps = {
-  getRestaurants,
-  getOrders,
   getDishes,
   getCombos,
+  getRestaurants,
+  getOrders,
   getEntity,
   updateEntity,
   setBlob,

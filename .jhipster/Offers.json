@@ -23,6 +23,22 @@
     ],
     "relationships": [
         {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "offer",
+            "relationshipName": "dishes",
+            "otherEntityName": "dishes",
+            "otherEntityField": "name",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "offer",
+            "relationshipName": "combos",
+            "otherEntityName": "combos",
+            "otherEntityField": "name",
+            "ownerSide": true
+        },
+        {
             "relationshipType": "many-to-one",
             "relationshipName": "restaurant",
             "otherEntityName": "restaurant",
@@ -33,20 +49,6 @@
             "relationshipName": "offers",
             "otherEntityName": "orders",
             "otherEntityField": "name"
-        },
-        {
-            "relationshipType": "many-to-many",
-            "relationshipName": "dishes",
-            "otherEntityName": "dishes",
-            "ownerSide": false,
-            "otherEntityRelationshipName": "offer"
-        },
-        {
-            "relationshipType": "many-to-many",
-            "relationshipName": "combos",
-            "otherEntityName": "combos",
-            "ownerSide": false,
-            "otherEntityRelationshipName": "offer"
         }
     ],
     "changelogDate": "20181127175405",

@@ -20,11 +20,11 @@
       "available": "Available",
       "image": "Image",
       "pricePerProduct": "Price Per Product",
-      "combos": "Combos",
-      "offer": "Offer",
       "restaurant": "Restaurant",
       "category": "Category",
-      "dishes": "Dishes"
+      "dishes": "Dishes",
+      "combos": "Combos",
+      "offer": "Offer"
     }
   }
 }

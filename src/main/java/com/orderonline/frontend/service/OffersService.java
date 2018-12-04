@@ -59,6 +59,15 @@ public class OffersService {
             .map(offersMapper::toDto);
     }
 
+    /**
+     * Get all the Offers with eager load of many-to-many relationships.
+     *
+     * @return the list of entities
+     */
+    public Page<OffersDTO> findAllWithEagerRelationships(Pageable pageable) {
+        return offersRepository.findAllWithEagerRelationships(pageable).map(offersMapper::toDto);
+    }
+    
 
     /**
      * Get one offers by id.
@@ -69,7 +78,7 @@ public class OffersService {
     @Transactional(readOnly = true)
     public Optional<OffersDTO> findOne(Long id) {
         log.debug("Request to get Offers : {}", id);
-        return offersRepository.findById(id)
+        return offersRepository.findOneWithEagerRelationships(id)
             .map(offersMapper::toDto);
     }
 

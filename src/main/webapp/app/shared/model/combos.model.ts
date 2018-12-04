@@ -1,17 +1,17 @@
 import { IPricePerProduct } from 'app/shared/model//price-per-product.model';
-import { IOffers } from 'app/shared/model//offers.model';
 import { IDishes } from 'app/shared/model//dishes.model';
+import { IOffers } from 'app/shared/model//offers.model';
 
 export interface ICombos {
   id?: number;
   name?: string;
   available?: boolean;
   pricePerProducts?: IPricePerProduct[];
-  offers?: IOffers[];
+  dishes?: IDishes[];
   restaurantId?: number;
   combosName?: string;
   combosId?: number;
-  dishes?: IDishes[];
+  offers?: IOffers[];
 }
 
 export const defaultValue: Readonly<ICombos> = {

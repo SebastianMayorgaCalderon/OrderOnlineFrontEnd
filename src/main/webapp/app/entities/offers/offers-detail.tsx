@@ -59,6 +59,32 @@ export class OffersDetail extends React.Component<IOffersDetailProps> {
               ) : null}
             </dd>
             <dt>
+              <Translate contentKey="orderOnlineFrontEndApp.offers.dishes">Dishes</Translate>
+            </dt>
+            <dd>
+              {offersEntity.dishes
+                ? offersEntity.dishes.map((val, i) => (
+                    <span key={val.id}>
+                      <a>{val.name}</a>
+                      {i === offersEntity.dishes.length - 1 ? '' : ', '}
+                    </span>
+                  ))
+                : null}
+            </dd>
+            <dt>
+              <Translate contentKey="orderOnlineFrontEndApp.offers.combos">Combos</Translate>
+            </dt>
+            <dd>
+              {offersEntity.combos
+                ? offersEntity.combos.map((val, i) => (
+                    <span key={val.id}>
+                      <a>{val.name}</a>
+                      {i === offersEntity.combos.length - 1 ? '' : ', '}
+                    </span>
+                  ))
+                : null}
+            </dd>
+            <dt>
               <Translate contentKey="orderOnlineFrontEndApp.offers.restaurant">Restaurant</Translate>
             </dt>
             <dd>{offersEntity.restaurantId ? offersEntity.restaurantId : ''}</dd>
