@@ -7,11 +7,11 @@ export interface IOffers {
   price?: number;
   imageContentType?: string;
   image?: any;
+  dishes?: IDishes[];
+  combos?: ICombos[];
   restaurantId?: number;
   offersName?: string;
   offersId?: number;
-  dishes?: IDishes[];
-  combos?: ICombos[];
 }
 
 export const defaultValue: Readonly<IOffers> = {};

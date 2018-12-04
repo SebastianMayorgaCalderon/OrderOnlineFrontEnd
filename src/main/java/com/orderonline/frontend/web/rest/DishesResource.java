@@ -86,20 +86,14 @@ public class DishesResource {
      * GET  /dishes : get all the dishes.
      *
      * @param pageable the pagination information
-     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many)
      * @return the ResponseEntity with status 200 (OK) and the list of dishes in body
      */
     @GetMapping("/dishes")
     @Timed
-    public ResponseEntity<List<DishesDTO>> getAllDishes(Pageable pageable, @RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+    public ResponseEntity<List<DishesDTO>> getAllDishes(Pageable pageable) {
         log.debug("REST request to get a page of Dishes");
-        Page<DishesDTO> page;
-        if (eagerload) {
-            page = dishesService.findAllWithEagerRelationships(pageable);
-        } else {
-            page = dishesService.findAll(pageable);
-        }
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, String.format("/api/dishes?eagerload=%b", eagerload));
+        Page<DishesDTO> page = dishesService.findAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/dishes");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 

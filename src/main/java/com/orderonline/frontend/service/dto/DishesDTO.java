@@ -2,8 +2,6 @@ package com.orderonline.frontend.service.dto;
 
 import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 import javax.persistence.Lob;
 
@@ -27,10 +25,6 @@ public class DishesDTO implements Serializable {
     @Lob
     private byte[] image;
     private String imageContentType;
-
-    private Set<CombosDTO> combos = new HashSet<>();
-
-    private Set<OffersDTO> offers = new HashSet<>();
 
     private Long restaurantId;
 
@@ -88,22 +82,6 @@ public class DishesDTO implements Serializable {
 
     public void setImageContentType(String imageContentType) {
         this.imageContentType = imageContentType;
-    }
-
-    public Set<CombosDTO> getCombos() {
-        return combos;
-    }
-
-    public void setCombos(Set<CombosDTO> combos) {
-        this.combos = combos;
-    }
-
-    public Set<OffersDTO> getOffers() {
-        return offers;
-    }
-
-    public void setOffers(Set<OffersDTO> offers) {
-        this.offers = offers;
     }
 
     public Long getRestaurantId() {

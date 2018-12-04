@@ -18,10 +18,10 @@
       "name": "Name",
       "available": "Available",
       "pricePerProduct": "Price Per Product",
-      "offer": "Offer",
+      "dishes": "Dishes",
       "restaurant": "Restaurant",
       "combos": "Combos",
-      "dishes": "Dishes"
+      "offer": "Offer"
     }
   }
 }

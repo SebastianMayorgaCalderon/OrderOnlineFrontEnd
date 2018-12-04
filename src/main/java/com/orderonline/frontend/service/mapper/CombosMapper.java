@@ -8,7 +8,7 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity Combos and its DTO CombosDTO.
  */
-@Mapper(componentModel = "spring", uses = {OffersMapper.class, RestaurantMapper.class, OrdersMapper.class})
+@Mapper(componentModel = "spring", uses = {DishesMapper.class, RestaurantMapper.class, OrdersMapper.class})
 public interface CombosMapper extends EntityMapper<CombosDTO, Combos> {
 
     @Mapping(source = "restaurant.id", target = "restaurantId")
@@ -19,7 +19,7 @@ public interface CombosMapper extends EntityMapper<CombosDTO, Combos> {
     @Mapping(target = "pricePerProducts", ignore = true)
     @Mapping(source = "restaurantId", target = "restaurant")
     @Mapping(source = "combosId", target = "combos")
-    @Mapping(target = "dishes", ignore = true)
+    @Mapping(target = "offers", ignore = true)
     Combos toEntity(CombosDTO combosDTO);
 
     default Combos fromId(Long id) {

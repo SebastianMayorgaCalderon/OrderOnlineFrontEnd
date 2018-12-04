@@ -63,10 +63,11 @@
         RestaurantAdmin{User} to User{RestaurantAdmin}
         Restaurant{RestaurantAdmin(name)} to RestaurantAdmin
     }
+
     relationship ManyToMany{
-        Dishes {Combos(Name)} to Combos{Dishes(Name)}
-        Dishes {Offer(Name)} to Offers{Dishes(Name)}
-        Combos {Offer(Name)} to Offers{Combos(Name)}
+       Combos{Dishes(Name)} to Dishes {Combos(Name)}
+        Offers{Dishes(Name)} to Dishes {Offer(Name)}
+       Offers{Combos(Name)}to  Combos {Offer(Name)}
     }
 
 

@@ -18,10 +18,10 @@
       "name": "Name",
       "price": "Price",
       "image": "Image",
-      "restaurant": "Restaurant",
-      "offers": "Offers",
       "dishes": "Dishes",
-      "combos": "Combos"
+      "combos": "Combos",
+      "restaurant": "Restaurant",
+      "offers": "Offers"
     }
   }
 }

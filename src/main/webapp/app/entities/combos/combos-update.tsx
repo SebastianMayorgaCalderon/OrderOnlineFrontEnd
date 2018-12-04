@@ -8,14 +8,14 @@ import { Translate, translate, ICrudGetAction, ICrudGetAllAction, ICrudPutAction
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IRootState } from 'app/shared/reducers';
 
-import { IOffers } from 'app/shared/model/offers.model';
-import { getEntities as getOffers } from 'app/entities/offers/offers.reducer';
+import { IDishes } from 'app/shared/model/dishes.model';
+import { getEntities as getDishes } from 'app/entities/dishes/dishes.reducer';
 import { IRestaurant } from 'app/shared/model/restaurant.model';
 import { getEntities as getRestaurants } from 'app/entities/restaurant/restaurant.reducer';
 import { IOrders } from 'app/shared/model/orders.model';
 import { getEntities as getOrders } from 'app/entities/orders/orders.reducer';
-import { IDishes } from 'app/shared/model/dishes.model';
-import { getEntities as getDishes } from 'app/entities/dishes/dishes.reducer';
+import { IOffers } from 'app/shared/model/offers.model';
+import { getEntities as getOffers } from 'app/entities/offers/offers.reducer';
 import { getEntity, updateEntity, createEntity, reset } from './combos.reducer';
 import { ICombos } from 'app/shared/model/combos.model';
 // tslint:disable-next-line:no-unused-variable
@@ -26,20 +26,20 @@ export interface ICombosUpdateProps extends StateProps, DispatchProps, RouteComp
 
 export interface ICombosUpdateState {
   isNew: boolean;
-  idsoffer: any[];
+  idsdishes: any[];
   restaurantId: string;
   combosId: string;
-  dishesId: string;
+  offerId: string;
 }
 
 export class CombosUpdate extends React.Component<ICombosUpdateProps, ICombosUpdateState> {
   constructor(props) {
     super(props);
     this.state = {
-      idsoffer: [],
+      idsdishes: [],
       restaurantId: '0',
       combosId: '0',
-      dishesId: '0',
+      offerId: '0',
       isNew: !this.props.match.params || !this.props.match.params.id
     };
   }
@@ -57,10 +57,10 @@ export class CombosUpdate extends React.Component<ICombosUpdateProps, ICombosUpd
       this.props.getEntity(this.props.match.params.id);
     }
 
-    this.props.getOffers();
+    this.props.getDishes();
     this.props.getRestaurants();
     this.props.getOrders();
-    this.props.getDishes();
+    this.props.getOffers();
   }
 
   saveEntity = (event, errors, values) => {
@@ -69,7 +69,7 @@ export class CombosUpdate extends React.Component<ICombosUpdateProps, ICombosUpd
       const entity = {
         ...combosEntity,
         ...values,
-        offers: mapIdList(values.offers)
+        dishes: mapIdList(values.dishes)
       };
 
       if (this.state.isNew) {
@@ -85,7 +85,7 @@ export class CombosUpdate extends React.Component<ICombosUpdateProps, ICombosUpd
   };
 
   render() {
-    const { combosEntity, offers, restaurants, orders, dishes, loading, updating } = this.props;
+    const { combosEntity, dishes, restaurants, orders, offers, loading, updating } = this.props;
     const { isNew } = this.state;
 
     return (
@@ -131,20 +131,20 @@ export class CombosUpdate extends React.Component<ICombosUpdateProps, ICombosUpd
                   </Label>
                 </AvGroup>
                 <AvGroup>
-                  <Label for="offers">
-                    <Translate contentKey="orderOnlineFrontEndApp.combos.offer">Offer</Translate>
+                  <Label for="dishes">
+                    <Translate contentKey="orderOnlineFrontEndApp.combos.dishes">Dishes</Translate>
                   </Label>
                   <AvInput
-                    id="combos-offer"
+                    id="combos-dishes"
                     type="select"
                     multiple
                     className="form-control"
-                    name="offers"
-                    value={combosEntity.offers && combosEntity.offers.map(e => e.id)}
+                    name="dishes"
+                    value={combosEntity.dishes && combosEntity.dishes.map(e => e.id)}
                   >
                     <option value="" key="0" />
-                    {offers
-                      ? offers.map(otherEntity => (
+                    {dishes
+                      ? dishes.map(otherEntity => (
                           <option value={otherEntity.id} key={otherEntity.id}>
                             {otherEntity.name}
                           </option>
@@ -176,7 +176,7 @@ export class CombosUpdate extends React.Component<ICombosUpdateProps, ICombosUpd
                     {orders
                       ? orders.map(otherEntity => (
                           <option value={otherEntity.id} key={otherEntity.id}>
-                            {otherEntity}
+                            {JSON.stringify(otherEntity)}
                           </option>
                         ))
                       : null}
@@ -205,10 +205,10 @@ export class CombosUpdate extends React.Component<ICombosUpdateProps, ICombosUpd
 }
 
 const mapStateToProps = (storeState: IRootState) => ({
-  offers: storeState.offers.entities,
+  dishes: storeState.dishes.entities,
   restaurants: storeState.restaurant.entities,
   orders: storeState.orders.entities,
-  dishes: storeState.dishes.entities,
+  offers: storeState.offers.entities,
   combosEntity: storeState.combos.entity,
   loading: storeState.combos.loading,
   updating: storeState.combos.updating,
@@ -216,10 +216,10 @@ const mapStateToProps = (storeState: IRootState) => ({
 });
 
 const mapDispatchToProps = {
-  getOffers,
+  getDishes,
   getRestaurants,
   getOrders,
-  getDishes,
+  getOffers,
   getEntity,
   updateEntity,
   createEntity,

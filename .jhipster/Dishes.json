@@ -39,22 +39,6 @@
             "otherEntityRelationshipName": "productDish"
         },
         {
-            "relationshipType": "many-to-many",
-            "otherEntityRelationshipName": "dishes",
-            "relationshipName": "combos",
-            "otherEntityName": "combos",
-            "otherEntityField": "name",
-            "ownerSide": true
-        },
-        {
-            "relationshipType": "many-to-many",
-            "otherEntityRelationshipName": "dishes",
-            "relationshipName": "offer",
-            "otherEntityName": "offers",
-            "otherEntityField": "name",
-            "ownerSide": true
-        },
-        {
             "relationshipType": "many-to-one",
             "relationshipName": "restaurant",
             "otherEntityName": "restaurant",
@@ -71,6 +55,20 @@
             "relationshipName": "dishes",
             "otherEntityName": "orders",
             "otherEntityField": "name"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "combos",
+            "otherEntityName": "combos",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "dishes"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "offer",
+            "otherEntityName": "offers",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "dishes"
         }
     ],
     "changelogDate": "20181127175404",

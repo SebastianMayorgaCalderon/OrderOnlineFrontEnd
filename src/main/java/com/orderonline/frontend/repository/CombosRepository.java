@@ -17,14 +17,14 @@ import java.util.Optional;
 @Repository
 public interface CombosRepository extends JpaRepository<Combos, Long> {
 
-    @Query(value = "select distinct combos from Combos combos left join fetch combos.offers",
+    @Query(value = "select distinct combos from Combos combos left join fetch combos.dishes",
         countQuery = "select count(distinct combos) from Combos combos")
     Page<Combos> findAllWithEagerRelationships(Pageable pageable);
 
-    @Query(value = "select distinct combos from Combos combos left join fetch combos.offers")
+    @Query(value = "select distinct combos from Combos combos left join fetch combos.dishes")
     List<Combos> findAllWithEagerRelationships();
 
-    @Query("select combos from Combos combos left join fetch combos.offers where combos.id =:id")
+    @Query("select combos from Combos combos left join fetch combos.dishes where combos.id =:id")
     Optional<Combos> findOneWithEagerRelationships(@Param("id") Long id);
 
 }
