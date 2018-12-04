@@ -56,28 +56,6 @@
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
         
-        <createTable tableName="dishes_combos">
-            <column name="combos_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="dishes_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addPrimaryKey columnNames="dishes_id, combos_id" tableName="dishes_combos"/>
-        
-        <createTable tableName="dishes_offer">
-            <column name="offers_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="dishes_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addPrimaryKey columnNames="dishes_id, offers_id" tableName="dishes_offer"/>
-        
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 </databaseChangeLog>

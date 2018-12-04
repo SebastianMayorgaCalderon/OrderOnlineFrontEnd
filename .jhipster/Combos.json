@@ -26,8 +26,8 @@
         {
             "relationshipType": "many-to-many",
             "otherEntityRelationshipName": "combos",
-            "relationshipName": "offer",
-            "otherEntityName": "offers",
+            "relationshipName": "dishes",
+            "otherEntityName": "dishes",
             "otherEntityField": "name",
             "ownerSide": true
         },
@@ -45,8 +45,8 @@
         },
         {
             "relationshipType": "many-to-many",
-            "relationshipName": "dishes",
-            "otherEntityName": "dishes",
+            "relationshipName": "offer",
+            "otherEntityName": "offers",
             "ownerSide": false,
             "otherEntityRelationshipName": "combos"
         }

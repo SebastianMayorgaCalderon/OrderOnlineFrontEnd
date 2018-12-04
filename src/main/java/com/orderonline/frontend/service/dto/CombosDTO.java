@@ -19,7 +19,7 @@ public class CombosDTO implements Serializable {
     @NotNull
     private Boolean available;
 
-    private Set<OffersDTO> offers = new HashSet<>();
+    private Set<DishesDTO> dishes = new HashSet<>();
 
     private Long restaurantId;
 
@@ -51,12 +51,12 @@ public class CombosDTO implements Serializable {
         this.available = available;
     }
 
-    public Set<OffersDTO> getOffers() {
-        return offers;
+    public Set<DishesDTO> getDishes() {
+        return dishes;
     }
 
-    public void setOffers(Set<OffersDTO> offers) {
-        this.offers = offers;
+    public void setDishes(Set<DishesDTO> dishes) {
+        this.dishes = dishes;
     }
 
     public Long getRestaurantId() {

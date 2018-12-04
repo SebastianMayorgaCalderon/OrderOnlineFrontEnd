@@ -12,12 +12,9 @@ import com.orderonline.frontend.web.rest.errors.ExceptionTranslator;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -28,14 +25,12 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Base64Utils;
 
 import javax.persistence.EntityManager;
-import java.util.ArrayList;
 import java.util.List;
 
 
 import static com.orderonline.frontend.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
-import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -65,14 +60,8 @@ public class DishesResourceIntTest {
     @Autowired
     private DishesRepository dishesRepository;
 
-    @Mock
-    private DishesRepository dishesRepositoryMock;
-
     @Autowired
     private DishesMapper dishesMapper;
-
-    @Mock
-    private DishesService dishesServiceMock;
 
     @Autowired
     private DishesService dishesService;
@@ -243,39 +232,6 @@ public class DishesResourceIntTest {
             .andExpect(jsonPath("$.[*].image").value(hasItem(Base64Utils.encodeToString(DEFAULT_IMAGE))));
     }
     
-    @SuppressWarnings({"unchecked"})
-    public void getAllDishesWithEagerRelationshipsIsEnabled() throws Exception {
-        DishesResource dishesResource = new DishesResource(dishesServiceMock);
-        when(dishesServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-        MockMvc restDishesMockMvc = MockMvcBuilders.standaloneSetup(dishesResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
-            .setControllerAdvice(exceptionTranslator)
-            .setConversionService(createFormattingConversionService())
-            .setMessageConverters(jacksonMessageConverter).build();
-
-        restDishesMockMvc.perform(get("/api/dishes?eagerload=true"))
-        .andExpect(status().isOk());
-
-        verify(dishesServiceMock, times(1)).findAllWithEagerRelationships(any());
-    }
-
-    @SuppressWarnings({"unchecked"})
-    public void getAllDishesWithEagerRelationshipsIsNotEnabled() throws Exception {
-        DishesResource dishesResource = new DishesResource(dishesServiceMock);
-            when(dishesServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-            MockMvc restDishesMockMvc = MockMvcBuilders.standaloneSetup(dishesResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
-            .setControllerAdvice(exceptionTranslator)
-            .setConversionService(createFormattingConversionService())
-            .setMessageConverters(jacksonMessageConverter).build();
-
-        restDishesMockMvc.perform(get("/api/dishes?eagerload=true"))
-        .andExpect(status().isOk());
-
-            verify(dishesServiceMock, times(1)).findAllWithEagerRelationships(any());
-    }
-
     @Test
     @Transactional
     public void getDishes() throws Exception {

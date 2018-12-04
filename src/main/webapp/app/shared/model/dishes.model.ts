@@ -10,13 +10,13 @@ export interface IDishes {
   imageContentType?: string;
   image?: any;
   pricePerProducts?: IPricePerProduct[];
-  combos?: ICombos[];
-  offers?: IOffers[];
   restaurantId?: number;
   categoryName?: string;
   categoryId?: number;
   dishesName?: string;
   dishesId?: number;
+  combos?: ICombos[];
+  offers?: IOffers[];
 }
 
 export const defaultValue: Readonly<IDishes> = {

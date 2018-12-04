@@ -86,14 +86,20 @@ public class OffersResource {
      * GET  /offers : get all the offers.
      *
      * @param pageable the pagination information
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many)
      * @return the ResponseEntity with status 200 (OK) and the list of offers in body
      */
     @GetMapping("/offers")
     @Timed
-    public ResponseEntity<List<OffersDTO>> getAllOffers(Pageable pageable) {
+    public ResponseEntity<List<OffersDTO>> getAllOffers(Pageable pageable, @RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get a page of Offers");
-        Page<OffersDTO> page = offersService.findAll(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/offers");
+        Page<OffersDTO> page;
+        if (eagerload) {
+            page = offersService.findAllWithEagerRelationships(pageable);
+        } else {
+            page = offersService.findAll(pageable);
+        }
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, String.format("/api/offers?eagerload=%b", eagerload));
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 

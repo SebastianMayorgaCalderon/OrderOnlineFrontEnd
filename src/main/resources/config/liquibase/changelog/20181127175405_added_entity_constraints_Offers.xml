@@ -8,6 +8,28 @@
     -->
     <changeSet id="20181127175405-2" author="jhipster">
         
+        <addForeignKeyConstraint baseColumnNames="offers_id"
+                                 baseTableName="offers_dishes"
+                                 constraintName="fk_offers_dishes_offers_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="offers"/>
+        <addForeignKeyConstraint baseColumnNames="dishes_id"
+                                 baseTableName="offers_dishes"
+                                 constraintName="fk_offers_dishes_dishes_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="dishes"/>
+        
+        <addForeignKeyConstraint baseColumnNames="offers_id"
+                                 baseTableName="offers_combos"
+                                 constraintName="fk_offers_combos_offers_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="offers"/>
+        <addForeignKeyConstraint baseColumnNames="combos_id"
+                                 baseTableName="offers_combos"
+                                 constraintName="fk_offers_combos_combos_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="combos"/>
+        
         <addForeignKeyConstraint baseColumnNames="restaurant_id"
                                  baseTableName="offers"
                                  constraintName="fk_offers_restaurant_id"

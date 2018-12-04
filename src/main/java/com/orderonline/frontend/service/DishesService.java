@@ -59,15 +59,6 @@ public class DishesService {
             .map(dishesMapper::toDto);
     }
 
-    /**
-     * Get all the Dishes with eager load of many-to-many relationships.
-     *
-     * @return the list of entities
-     */
-    public Page<DishesDTO> findAllWithEagerRelationships(Pageable pageable) {
-        return dishesRepository.findAllWithEagerRelationships(pageable).map(dishesMapper::toDto);
-    }
-    
 
     /**
      * Get one dishes by id.
@@ -78,7 +69,7 @@ public class DishesService {
     @Transactional(readOnly = true)
     public Optional<DishesDTO> findOne(Long id) {
         log.debug("Request to get Dishes : {}", id);
-        return dishesRepository.findOneWithEagerRelationships(id)
+        return dishesRepository.findById(id)
             .map(dishesMapper::toDto);
     }
 

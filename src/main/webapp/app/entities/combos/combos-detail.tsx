@@ -41,14 +41,14 @@ export class CombosDetail extends React.Component<ICombosDetailProps> {
             </dt>
             <dd>{combosEntity.available ? 'true' : 'false'}</dd>
             <dt>
-              <Translate contentKey="orderOnlineFrontEndApp.combos.offer">Offer</Translate>
+              <Translate contentKey="orderOnlineFrontEndApp.combos.dishes">Dishes</Translate>
             </dt>
             <dd>
-              {combosEntity.offers
-                ? combosEntity.offers.map((val, i) => (
+              {combosEntity.dishes
+                ? combosEntity.dishes.map((val, i) => (
                     <span key={val.id}>
                       <a>{val.name}</a>
-                      {i === combosEntity.offers.length - 1 ? '' : ', '}
+                      {i === combosEntity.dishes.length - 1 ? '' : ', '}
                     </span>
                   ))
                 : null}

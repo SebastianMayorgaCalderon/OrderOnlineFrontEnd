@@ -8,7 +8,7 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity Dishes and its DTO DishesDTO.
  */
-@Mapper(componentModel = "spring", uses = {CombosMapper.class, OffersMapper.class, RestaurantMapper.class, CategoryMapper.class, OrdersMapper.class})
+@Mapper(componentModel = "spring", uses = {RestaurantMapper.class, CategoryMapper.class, OrdersMapper.class})
 public interface DishesMapper extends EntityMapper<DishesDTO, Dishes> {
 
     @Mapping(source = "restaurant.id", target = "restaurantId")
@@ -22,6 +22,8 @@ public interface DishesMapper extends EntityMapper<DishesDTO, Dishes> {
     @Mapping(source = "restaurantId", target = "restaurant")
     @Mapping(source = "categoryId", target = "category")
     @Mapping(source = "dishesId", target = "dishes")
+    @Mapping(target = "combos", ignore = true)
+    @Mapping(target = "offers", ignore = true)
     Dishes toEntity(DishesDTO dishesDTO);
 
     default Dishes fromId(Long id) {

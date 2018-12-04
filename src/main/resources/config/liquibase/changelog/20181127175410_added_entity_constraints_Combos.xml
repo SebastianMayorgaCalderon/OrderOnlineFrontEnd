@@ -9,15 +9,15 @@
     <changeSet id="20181127175410-2" author="jhipster">
         
         <addForeignKeyConstraint baseColumnNames="combos_id"
-                                 baseTableName="combos_offer"
-                                 constraintName="fk_combos_offer_combos_id"
+                                 baseTableName="combos_dishes"
+                                 constraintName="fk_combos_dishes_combos_id"
                                  referencedColumnNames="id"
                                  referencedTableName="combos"/>
-        <addForeignKeyConstraint baseColumnNames="offers_id"
-                                 baseTableName="combos_offer"
-                                 constraintName="fk_combos_offer_offers_id"
+        <addForeignKeyConstraint baseColumnNames="dishes_id"
+                                 baseTableName="combos_dishes"
+                                 constraintName="fk_combos_dishes_dishes_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="offers"/>
+                                 referencedTableName="dishes"/>
         
         <addForeignKeyConstraint baseColumnNames="restaurant_id"
                                  baseTableName="combos"

@@ -35,10 +35,10 @@ public class Combos implements Serializable {
     @OneToMany(mappedBy = "productCombo")
     private Set<PricePerProduct> pricePerProducts = new HashSet<>();
     @ManyToMany
-    @JoinTable(name = "combos_offer",
+    @JoinTable(name = "combos_dishes",
                joinColumns = @JoinColumn(name = "combos_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "offers_id", referencedColumnName = "id"))
-    private Set<Offers> offers = new HashSet<>();
+               inverseJoinColumns = @JoinColumn(name = "dishes_id", referencedColumnName = "id"))
+    private Set<Dishes> dishes = new HashSet<>();
 
     @ManyToOne
     @JsonIgnoreProperties("combos")
@@ -50,7 +50,7 @@ public class Combos implements Serializable {
 
     @ManyToMany(mappedBy = "combos")
     @JsonIgnore
-    private Set<Dishes> dishes = new HashSet<>();
+    private Set<Offers> offers = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -112,29 +112,29 @@ public class Combos implements Serializable {
         this.pricePerProducts = pricePerProducts;
     }
 
-    public Set<Offers> getOffers() {
-        return offers;
+    public Set<Dishes> getDishes() {
+        return dishes;
     }
 
-    public Combos offers(Set<Offers> offers) {
-        this.offers = offers;
+    public Combos dishes(Set<Dishes> dishes) {
+        this.dishes = dishes;
         return this;
     }
 
-    public Combos addOffer(Offers offers) {
-        this.offers.add(offers);
-        offers.getCombos().add(this);
+    public Combos addDishes(Dishes dishes) {
+        this.dishes.add(dishes);
+        dishes.getCombos().add(this);
         return this;
     }
 
-    public Combos removeOffer(Offers offers) {
-        this.offers.remove(offers);
-        offers.getCombos().remove(this);
+    public Combos removeDishes(Dishes dishes) {
+        this.dishes.remove(dishes);
+        dishes.getCombos().remove(this);
         return this;
     }
 
-    public void setOffers(Set<Offers> offers) {
-        this.offers = offers;
+    public void setDishes(Set<Dishes> dishes) {
+        this.dishes = dishes;
     }
 
     public Restaurant getRestaurant() {
@@ -163,29 +163,29 @@ public class Combos implements Serializable {
         this.combos = orders;
     }
 
-    public Set<Dishes> getDishes() {
-        return dishes;
+    public Set<Offers> getOffers() {
+        return offers;
     }
 
-    public Combos dishes(Set<Dishes> dishes) {
-        this.dishes = dishes;
+    public Combos offers(Set<Offers> offers) {
+        this.offers = offers;
         return this;
     }
 
-    public Combos addDishes(Dishes dishes) {
-        this.dishes.add(dishes);
-        dishes.getCombos().add(this);
+    public Combos addOffer(Offers offers) {
+        this.offers.add(offers);
+        offers.getCombos().add(this);
         return this;
     }
 
-    public Combos removeDishes(Dishes dishes) {
-        this.dishes.remove(dishes);
-        dishes.getCombos().remove(this);
+    public Combos removeOffer(Offers offers) {
+        this.offers.remove(offers);
+        offers.getCombos().remove(this);
         return this;
     }
 
-    public void setDishes(Set<Dishes> dishes) {
-        this.dishes = dishes;
+    public void setOffers(Set<Offers> offers) {
+        this.offers = offers;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
