@@ -77,25 +77,19 @@ export class Dishes extends React.Component<IDishesProps, IDishesState> {
                   <Translate contentKey="global.field.id">ID</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={this.sort('name')}>
-                  <Translate contentKey="orderOnlineFrontEndApp.dishes.name">Name</Translate> <FontAwesomeIcon icon="sort" />
+                  Nombre <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={this.sort('description')}>
-                  <Translate contentKey="orderOnlineFrontEndApp.dishes.description">Description</Translate> <FontAwesomeIcon icon="sort" />
+                  Descripción <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={this.sort('available')}>
-                  <Translate contentKey="orderOnlineFrontEndApp.dishes.available">Available</Translate> <FontAwesomeIcon icon="sort" />
+                  Disponible <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={this.sort('image')}>
-                  <Translate contentKey="orderOnlineFrontEndApp.dishes.image">Image</Translate> <FontAwesomeIcon icon="sort" />
+                  Imagen <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
-                  <Translate contentKey="orderOnlineFrontEndApp.dishes.restaurant">Restaurant</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th>
-                  <Translate contentKey="orderOnlineFrontEndApp.dishes.category">Category</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th>
-                  <Translate contentKey="orderOnlineFrontEndApp.dishes.dishes">Dishes</Translate> <FontAwesomeIcon icon="sort" />
+                  Categoria <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -110,7 +104,7 @@ export class Dishes extends React.Component<IDishesProps, IDishesState> {
                   </td>
                   <td>{dishes.name}</td>
                   <td>{dishes.description}</td>
-                  <td>{dishes.available ? 'true' : 'false'}</td>
+                  <td>{dishes.available ? 'Si' : 'No'}</td>
                   <td>
                     {dishes.image ? (
                       <div>
@@ -124,9 +118,7 @@ export class Dishes extends React.Component<IDishesProps, IDishesState> {
                       </div>
                     ) : null}
                   </td>
-                  <td>{dishes.restaurantId ? <Link to={`restaurant/${dishes.restaurantId}`}>{dishes.restaurantId}</Link> : ''}</td>
                   <td>{dishes.categoryName ? <Link to={`category/${dishes.categoryId}`}>{dishes.categoryName}</Link> : ''}</td>
-                  <td>{dishes.dishesName ? <Link to={`orders/${dishes.dishesId}`}>{dishes.dishesName}</Link> : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${dishes.id}`} color="info" size="sm">

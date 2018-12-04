@@ -30,18 +30,18 @@ export class CombosDetail extends React.Component<ICombosDetailProps> {
           <dl className="jh-entity-details">
             <dt>
               <span id="name">
-                <Translate contentKey="orderOnlineFrontEndApp.combos.name">Name</Translate>
+                Nombre
               </span>
             </dt>
             <dd>{combosEntity.name}</dd>
             <dt>
               <span id="available">
-                <Translate contentKey="orderOnlineFrontEndApp.combos.available">Available</Translate>
+                Disponible
               </span>
             </dt>
             <dd>{combosEntity.available ? 'true' : 'false'}</dd>
             <dt>
-              <Translate contentKey="orderOnlineFrontEndApp.combos.dishes">Dishes</Translate>
+              Contiene los siguientes platillos:
             </dt>
             <dd>
               {combosEntity.dishes
@@ -53,14 +53,6 @@ export class CombosDetail extends React.Component<ICombosDetailProps> {
                   ))
                 : null}
             </dd>
-            <dt>
-              <Translate contentKey="orderOnlineFrontEndApp.combos.restaurant">Restaurant</Translate>
-            </dt>
-            <dd>{combosEntity.restaurantId ? combosEntity.restaurantId : ''}</dd>
-            <dt>
-              <Translate contentKey="orderOnlineFrontEndApp.combos.combos">Combos</Translate>
-            </dt>
-            <dd>{combosEntity.combosName ? combosEntity.combosName : ''}</dd>
           </dl>
           <Button tag={Link} to="/entity/combos" replace color="info">
             <FontAwesomeIcon icon="arrow-left" />{' '}

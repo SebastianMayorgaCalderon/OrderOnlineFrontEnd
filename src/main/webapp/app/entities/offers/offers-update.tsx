@@ -124,7 +124,7 @@ export class OffersUpdate extends React.Component<IOffersUpdateProps, IOffersUpd
                 ) : null}
                 <AvGroup>
                   <Label id="nameLabel" for="name">
-                    <Translate contentKey="orderOnlineFrontEndApp.offers.name">Name</Translate>
+                    Nombre
                   </Label>
                   <AvField
                     id="offers-name"
@@ -137,7 +137,7 @@ export class OffersUpdate extends React.Component<IOffersUpdateProps, IOffersUpd
                 </AvGroup>
                 <AvGroup>
                   <Label id="priceLabel" for="price">
-                    <Translate contentKey="orderOnlineFrontEndApp.offers.price">Price</Translate>
+                    Precio
                   </Label>
                   <AvField
                     id="offers-price"
@@ -153,13 +153,13 @@ export class OffersUpdate extends React.Component<IOffersUpdateProps, IOffersUpd
                 <AvGroup>
                   <AvGroup>
                     <Label id="imageLabel" for="image">
-                      <Translate contentKey="orderOnlineFrontEndApp.offers.image">Image</Translate>
+                      Imagen
                     </Label>
                     <br />
                     {image ? (
                       <div>
                         <a onClick={openFile(imageContentType, image)}>
-                          <Translate contentKey="entity.action.open">Open</Translate>
+                          Abrir
                         </a>
                         <br />
                         <Row>
@@ -182,7 +182,7 @@ export class OffersUpdate extends React.Component<IOffersUpdateProps, IOffersUpd
                 </AvGroup>
                 <AvGroup>
                   <Label for="dishes">
-                    <Translate contentKey="orderOnlineFrontEndApp.offers.dishes">Dishes</Translate>
+                    ¿Posee platillos?
                   </Label>
                   <AvInput
                     id="offers-dishes"
@@ -204,7 +204,7 @@ export class OffersUpdate extends React.Component<IOffersUpdateProps, IOffersUpd
                 </AvGroup>
                 <AvGroup>
                   <Label for="combos">
-                    <Translate contentKey="orderOnlineFrontEndApp.offers.combos">Combos</Translate>
+                  ¿Posee algún combo?
                   </Label>
                   <AvInput
                     id="offers-combos"
@@ -219,36 +219,6 @@ export class OffersUpdate extends React.Component<IOffersUpdateProps, IOffersUpd
                       ? combos.map(otherEntity => (
                           <option value={otherEntity.id} key={otherEntity.id}>
                             {otherEntity.name}
-                          </option>
-                        ))
-                      : null}
-                  </AvInput>
-                </AvGroup>
-                <AvGroup>
-                  <Label for="restaurant.id">
-                    <Translate contentKey="orderOnlineFrontEndApp.offers.restaurant">Restaurant</Translate>
-                  </Label>
-                  <AvInput id="offers-restaurant" type="select" className="form-control" name="restaurantId">
-                    <option value="" key="0" />
-                    {restaurants
-                      ? restaurants.map(otherEntity => (
-                          <option value={otherEntity.id} key={otherEntity.id}>
-                            {otherEntity.id}
-                          </option>
-                        ))
-                      : null}
-                  </AvInput>
-                </AvGroup>
-                <AvGroup>
-                  <Label for="offers.name">
-                    <Translate contentKey="orderOnlineFrontEndApp.offers.offers">Offers</Translate>
-                  </Label>
-                  <AvInput id="offers-offers" type="select" className="form-control" name="offersId">
-                    <option value="" key="0" />
-                    {orders
-                      ? orders.map(otherEntity => (
-                          <option value={otherEntity.id} key={otherEntity.id}>
-                            {JSON.stringify(otherEntity)}
                           </option>
                         ))
                       : null}

@@ -25,24 +25,24 @@ export class OffersDetail extends React.Component<IOffersDetailProps> {
       <Row>
         <Col md="8">
           <h2>
-            <Translate contentKey="orderOnlineFrontEndApp.offers.detail.title">Offers</Translate> [<b>{offersEntity.id}</b>]
+            Ofertas
           </h2>
           <dl className="jh-entity-details">
             <dt>
               <span id="name">
-                <Translate contentKey="orderOnlineFrontEndApp.offers.name">Name</Translate>
+                Nombre
               </span>
             </dt>
             <dd>{offersEntity.name}</dd>
             <dt>
               <span id="price">
-                <Translate contentKey="orderOnlineFrontEndApp.offers.price">Price</Translate>
+                Precio
               </span>
             </dt>
             <dd>{offersEntity.price}</dd>
             <dt>
               <span id="image">
-                <Translate contentKey="orderOnlineFrontEndApp.offers.image">Image</Translate>
+                Imagen
               </span>
             </dt>
             <dd>
@@ -59,7 +59,7 @@ export class OffersDetail extends React.Component<IOffersDetailProps> {
               ) : null}
             </dd>
             <dt>
-              <Translate contentKey="orderOnlineFrontEndApp.offers.dishes">Dishes</Translate>
+              Los platillos que posee:
             </dt>
             <dd>
               {offersEntity.dishes
@@ -72,7 +72,7 @@ export class OffersDetail extends React.Component<IOffersDetailProps> {
                 : null}
             </dd>
             <dt>
-              <Translate contentKey="orderOnlineFrontEndApp.offers.combos">Combos</Translate>
+              Los combos que posee:
             </dt>
             <dd>
               {offersEntity.combos
