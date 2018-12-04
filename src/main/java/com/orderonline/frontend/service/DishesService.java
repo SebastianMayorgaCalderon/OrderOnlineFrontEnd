@@ -45,9 +45,7 @@ public class DishesService {
      */
     public DishesDTO save(DishesDTO dishesDTO) {
         log.debug("Request to save Dishes : {}", dishesDTO);
-        Restaurant restaurant = this.restaurantService.findOneByUser(SecurityUtils.getCurrentUserLogin().orElse(null));
-        Dishes dishes = dishesMapper.toEntity(dishesDTO);
-        dishes.setRestaurant(restaurant);
+        Dishes dishes = this.dishesMapper.toEntity(dishesDTO);
         dishes = dishesRepository.save(dishes);
         return dishesMapper.toDto(dishes);
     }

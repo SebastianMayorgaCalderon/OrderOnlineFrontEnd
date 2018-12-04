@@ -21,7 +21,7 @@ public class DishesDTO implements Serializable {
     @NotNull
     private Boolean available;
 
-    
+
     @Lob
     private byte[] image;
     private String imageContentType;
