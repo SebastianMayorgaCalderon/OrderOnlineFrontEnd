@@ -77,19 +77,13 @@ export class Offers extends React.Component<IOffersProps, IOffersState> {
                   <Translate contentKey="global.field.id">ID</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={this.sort('name')}>
-                  <Translate contentKey="orderOnlineFrontEndApp.offers.name">Name</Translate> <FontAwesomeIcon icon="sort" />
+                  Nombre <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={this.sort('price')}>
-                  <Translate contentKey="orderOnlineFrontEndApp.offers.price">Price</Translate> <FontAwesomeIcon icon="sort" />
+                  Precio <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={this.sort('image')}>
-                  <Translate contentKey="orderOnlineFrontEndApp.offers.image">Image</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th>
-                  <Translate contentKey="orderOnlineFrontEndApp.offers.restaurant">Restaurant</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th>
-                  <Translate contentKey="orderOnlineFrontEndApp.offers.offers">Offers</Translate> <FontAwesomeIcon icon="sort" />
+                  Imagen <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -117,8 +111,6 @@ export class Offers extends React.Component<IOffersProps, IOffersState> {
                       </div>
                     ) : null}
                   </td>
-                  <td>{offers.restaurantId ? <Link to={`restaurant/${offers.restaurantId}`}>{offers.restaurantId}</Link> : ''}</td>
-                  <td>{offers.offersName ? <Link to={`orders/${offers.offersId}`}>{offers.offersName}</Link> : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${offers.id}`} color="info" size="sm">
