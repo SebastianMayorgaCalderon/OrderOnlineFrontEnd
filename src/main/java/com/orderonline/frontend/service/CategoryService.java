@@ -61,7 +61,7 @@ public class CategoryService {
     public Page<CategoryDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Categories");
         Restaurant restaurant = this.restaurantService.findOneByUser(SecurityUtils.getCurrentUserLogin().orElse(null));
-        return categoryRepository.findAllByRestaurant(pageable, restaurant  )
+        return categoryRepository.findAllByRestaurant(pageable, restaurant)
             .map(categoryMapper::toDto);
     }
 

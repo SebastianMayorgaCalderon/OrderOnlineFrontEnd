@@ -76,12 +76,6 @@ export class Combos extends React.Component<ICombosProps, ICombosState> {
                 <th className="hand" onClick={this.sort('price')}>
                   <Translate contentKey="orderOnlineFrontEndApp.combos.price">Price</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
-                <th>
-                  <Translate contentKey="orderOnlineFrontEndApp.combos.restaurant">Restaurant</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th>
-                  <Translate contentKey="orderOnlineFrontEndApp.combos.combos">Combos</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
                 <th />
               </tr>
             </thead>
@@ -94,10 +88,8 @@ export class Combos extends React.Component<ICombosProps, ICombosState> {
                     </Button>
                   </td>
                   <td>{combos.name}</td>
-                  <td>{combos.available ? 'true' : 'false'}</td>
+                  <td>{combos.available ? 'Si' : 'No'}</td>
                   <td>{combos.price}</td>
-                  <td>{combos.restaurantId ? <Link to={`restaurant/${combos.restaurantId}`}>{combos.restaurantId}</Link> : ''}</td>
-                  <td>{combos.combosName ? <Link to={`orders/${combos.combosId}`}>{combos.combosName}</Link> : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${combos.id}`} color="info" size="sm">
