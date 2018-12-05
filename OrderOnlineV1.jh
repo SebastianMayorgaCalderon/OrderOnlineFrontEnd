@@ -1,18 +1,21 @@
     entity Category{
-    Name String required
+        Name String required
     }
 
     entity Dishes{
-    Name String required
-    Description String required
-    Available Boolean required
-    Image Blob required
+        Name String required
+        Description String required
+        Price Double required
+        Available Boolean required
+        Image Blob required
     }
 
     entity Offers{
-    Name String required
-    Price Double required
-    Image Blob
+        Name String required
+        Price Double required
+        Image Blob,
+        Available Boolean required
+
     }
 
     entity RestaurantAdmin{
@@ -41,6 +44,7 @@
     entity Combos{
         Name String required
         Available Boolean required
+        Price Double required
     }
 
 
@@ -65,9 +69,9 @@
     }
 
     relationship ManyToMany{
-       Combos{Dishes(Name)} to Dishes {Combos(Name)}
+        Combos{Dishes(Name)} to Dishes {Combos(Name)}
         Offers{Dishes(Name)} to Dishes {Offer(Name)}
-       Offers{Combos(Name)}to  Combos {Offer(Name)}
+        Offers{Combos(Name)}to  Combos {Offer(Name)}
     }
 
 

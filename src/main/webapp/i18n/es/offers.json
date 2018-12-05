@@ -18,6 +18,7 @@
       "name": "Name",
       "price": "Price",
       "image": "Image",
+      "available": "Available",
       "dishes": "Dishes",
       "combos": "Combos",
       "restaurant": "Restaurant",

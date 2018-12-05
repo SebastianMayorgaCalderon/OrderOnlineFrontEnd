@@ -25,24 +25,24 @@ export class OffersDetail extends React.Component<IOffersDetailProps> {
       <Row>
         <Col md="8">
           <h2>
-            Ofertas
+            <Translate contentKey="orderOnlineFrontEndApp.offers.detail.title">Offers</Translate> [<b>{offersEntity.id}</b>]
           </h2>
           <dl className="jh-entity-details">
             <dt>
               <span id="name">
-                Nombre
+                <Translate contentKey="orderOnlineFrontEndApp.offers.name">Name</Translate>
               </span>
             </dt>
             <dd>{offersEntity.name}</dd>
             <dt>
               <span id="price">
-                Precio
+                <Translate contentKey="orderOnlineFrontEndApp.offers.price">Price</Translate>
               </span>
             </dt>
             <dd>{offersEntity.price}</dd>
             <dt>
               <span id="image">
-                Imagen
+                <Translate contentKey="orderOnlineFrontEndApp.offers.image">Image</Translate>
               </span>
             </dt>
             <dd>
@@ -59,7 +59,13 @@ export class OffersDetail extends React.Component<IOffersDetailProps> {
               ) : null}
             </dd>
             <dt>
-              Los platillos que posee:
+              <span id="available">
+                <Translate contentKey="orderOnlineFrontEndApp.offers.available">Available</Translate>
+              </span>
+            </dt>
+            <dd>{offersEntity.available ? 'true' : 'false'}</dd>
+            <dt>
+              <Translate contentKey="orderOnlineFrontEndApp.offers.dishes">Dishes</Translate>
             </dt>
             <dd>
               {offersEntity.dishes
@@ -72,7 +78,7 @@ export class OffersDetail extends React.Component<IOffersDetailProps> {
                 : null}
             </dd>
             <dt>
-              Los combos que posee:
+              <Translate contentKey="orderOnlineFrontEndApp.offers.combos">Combos</Translate>
             </dt>
             <dd>
               {offersEntity.combos

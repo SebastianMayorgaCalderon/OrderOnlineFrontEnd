@@ -1,9 +1,7 @@
 package com.orderonline.frontend.service;
 
 import com.orderonline.frontend.domain.Combos;
-import com.orderonline.frontend.domain.Restaurant;
 import com.orderonline.frontend.repository.CombosRepository;
-import com.orderonline.frontend.security.SecurityUtils;
 import com.orderonline.frontend.service.dto.CombosDTO;
 import com.orderonline.frontend.service.mapper.CombosMapper;
 import org.slf4j.Logger;
@@ -29,12 +27,9 @@ public class CombosService {
 
     private final CombosMapper combosMapper;
 
-    private final RestaurantService restaurantService;
-
-    public CombosService(CombosRepository combosRepository, CombosMapper combosMapper, RestaurantService restaurantService) {
+    public CombosService(CombosRepository combosRepository, CombosMapper combosMapper) {
         this.combosRepository = combosRepository;
         this.combosMapper = combosMapper;
-        this.restaurantService = restaurantService;
     }
 
     /**
@@ -45,9 +40,8 @@ public class CombosService {
      */
     public CombosDTO save(CombosDTO combosDTO) {
         log.debug("Request to save Combos : {}", combosDTO);
-        Restaurant restaurant = this.restaurantService.findOneByUser(SecurityUtils.getCurrentUserLogin().orElse(null));
+
         Combos combos = combosMapper.toEntity(combosDTO);
-        combos.setRestaurant(restaurant);
         combos = combosRepository.save(combos);
         return combosMapper.toDto(combos);
     }
@@ -61,9 +55,7 @@ public class CombosService {
     @Transactional(readOnly = true)
     public Page<CombosDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Combos");
-        Restaurant restaurant = this.restaurantService.findOneByUser(SecurityUtils.getCurrentUserLogin().orElse(null));
-        log.debug("Request to get all Dishes");
-        return combosRepository.findAllByRestaurant(pageable, restaurant)
+        return combosRepository.findAll(pageable)
             .map(combosMapper::toDto);
     }
 

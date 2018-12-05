@@ -6,6 +6,7 @@ export interface ICombos {
   id?: number;
   name?: string;
   available?: boolean;
+  price?: number;
   pricePerProducts?: IPricePerProduct[];
   dishes?: IDishes[];
   restaurantId?: number;

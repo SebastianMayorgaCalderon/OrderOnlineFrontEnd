@@ -53,6 +53,9 @@ public class CombosResourceIntTest {
     private static final Boolean DEFAULT_AVAILABLE = false;
     private static final Boolean UPDATED_AVAILABLE = true;
 
+    private static final Double DEFAULT_PRICE = 1D;
+    private static final Double UPDATED_PRICE = 2D;
+
     @Autowired
     private CombosRepository combosRepository;
 
@@ -104,7 +107,8 @@ public class CombosResourceIntTest {
     public static Combos createEntity(EntityManager em) {
         Combos combos = new Combos()
             .name(DEFAULT_NAME)
-            .available(DEFAULT_AVAILABLE);
+            .available(DEFAULT_AVAILABLE)
+            .price(DEFAULT_PRICE);
         return combos;
     }
 
@@ -131,6 +135,7 @@ public class CombosResourceIntTest {
         Combos testCombos = combosList.get(combosList.size() - 1);
         assertThat(testCombos.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testCombos.isAvailable()).isEqualTo(DEFAULT_AVAILABLE);
+        assertThat(testCombos.getPrice()).isEqualTo(DEFAULT_PRICE);
     }
 
     @Test
@@ -193,6 +198,25 @@ public class CombosResourceIntTest {
 
     @Test
     @Transactional
+    public void checkPriceIsRequired() throws Exception {
+        int databaseSizeBeforeTest = combosRepository.findAll().size();
+        // set the field null
+        combos.setPrice(null);
+
+        // Create the Combos, which fails.
+        CombosDTO combosDTO = combosMapper.toDto(combos);
+
+        restCombosMockMvc.perform(post("/api/combos")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(combosDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Combos> combosList = combosRepository.findAll();
+        assertThat(combosList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllCombos() throws Exception {
         // Initialize the database
         combosRepository.saveAndFlush(combos);
@@ -203,7 +227,8 @@ public class CombosResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(combos.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].available").value(hasItem(DEFAULT_AVAILABLE.booleanValue())));
+            .andExpect(jsonPath("$.[*].available").value(hasItem(DEFAULT_AVAILABLE.booleanValue())))
+            .andExpect(jsonPath("$.[*].price").value(hasItem(DEFAULT_PRICE.doubleValue())));
     }
     
     @SuppressWarnings({"unchecked"})
@@ -251,7 +276,8 @@ public class CombosResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(combos.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
-            .andExpect(jsonPath("$.available").value(DEFAULT_AVAILABLE.booleanValue()));
+            .andExpect(jsonPath("$.available").value(DEFAULT_AVAILABLE.booleanValue()))
+            .andExpect(jsonPath("$.price").value(DEFAULT_PRICE.doubleValue()));
     }
 
     @Test
@@ -276,7 +302,8 @@ public class CombosResourceIntTest {
         em.detach(updatedCombos);
         updatedCombos
             .name(UPDATED_NAME)
-            .available(UPDATED_AVAILABLE);
+            .available(UPDATED_AVAILABLE)
+            .price(UPDATED_PRICE);
         CombosDTO combosDTO = combosMapper.toDto(updatedCombos);
 
         restCombosMockMvc.perform(put("/api/combos")
@@ -290,6 +317,7 @@ public class CombosResourceIntTest {
         Combos testCombos = combosList.get(combosList.size() - 1);
         assertThat(testCombos.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testCombos.isAvailable()).isEqualTo(UPDATED_AVAILABLE);
+        assertThat(testCombos.getPrice()).isEqualTo(UPDATED_PRICE);
     }
 
     @Test

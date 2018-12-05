@@ -38,6 +38,10 @@ public class Offers implements Serializable {
     @Column(name = "image_content_type")
     private String imageContentType;
 
+    @NotNull
+    @Column(name = "available", nullable = false)
+    private Boolean available;
+
     @ManyToMany
     @JoinTable(name = "offers_dishes",
                joinColumns = @JoinColumn(name = "offers_id", referencedColumnName = "id"),
@@ -117,6 +121,19 @@ public class Offers implements Serializable {
 
     public void setImageContentType(String imageContentType) {
         this.imageContentType = imageContentType;
+    }
+
+    public Boolean isAvailable() {
+        return available;
+    }
+
+    public Offers available(Boolean available) {
+        this.available = available;
+        return this;
+    }
+
+    public void setAvailable(Boolean available) {
+        this.available = available;
     }
 
     public Set<Dishes> getDishes() {
@@ -224,6 +241,7 @@ public class Offers implements Serializable {
             ", price=" + getPrice() +
             ", image='" + getImage() + "'" +
             ", imageContentType='" + getImageContentType() + "'" +
+            ", available='" + isAvailable() + "'" +
             "}";
     }
 }
