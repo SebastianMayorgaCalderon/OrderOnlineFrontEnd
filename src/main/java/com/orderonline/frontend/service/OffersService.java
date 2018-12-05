@@ -1,9 +1,7 @@
 package com.orderonline.frontend.service;
 
 import com.orderonline.frontend.domain.Offers;
-import com.orderonline.frontend.domain.Restaurant;
 import com.orderonline.frontend.repository.OffersRepository;
-import com.orderonline.frontend.security.SecurityUtils;
 import com.orderonline.frontend.service.dto.OffersDTO;
 import com.orderonline.frontend.service.mapper.OffersMapper;
 import org.slf4j.Logger;
@@ -29,12 +27,9 @@ public class OffersService {
 
     private final OffersMapper offersMapper;
 
-    private final RestaurantService restaurantService;
-
-    public OffersService(OffersRepository offersRepository, OffersMapper offersMapper, RestaurantService restaurantService) {
+    public OffersService(OffersRepository offersRepository, OffersMapper offersMapper) {
         this.offersRepository = offersRepository;
         this.offersMapper = offersMapper;
-        this.restaurantService = restaurantService;
     }
 
     /**
@@ -45,9 +40,8 @@ public class OffersService {
      */
     public OffersDTO save(OffersDTO offersDTO) {
         log.debug("Request to save Offers : {}", offersDTO);
-        Restaurant restaurant = this.restaurantService.findOneByUser(SecurityUtils.getCurrentUserLogin().orElse(null));
+
         Offers offers = offersMapper.toEntity(offersDTO);
-        offers.setRestaurant(restaurant);
         offers = offersRepository.save(offers);
         return offersMapper.toDto(offers);
     }
@@ -61,8 +55,7 @@ public class OffersService {
     @Transactional(readOnly = true)
     public Page<OffersDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Offers");
-        Restaurant restaurant = this.restaurantService.findOneByUser(SecurityUtils.getCurrentUserLogin().orElse(null));
-        return offersRepository.findAllByRestaurant(pageable, restaurant)
+        return offersRepository.findAll(pageable)
             .map(offersMapper::toDto);
     }
 

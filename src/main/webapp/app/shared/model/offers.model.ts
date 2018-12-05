@@ -7,6 +7,7 @@ export interface IOffers {
   price?: number;
   imageContentType?: string;
   image?: any;
+  available?: boolean;
   dishes?: IDishes[];
   combos?: ICombos[];
   restaurantId?: number;
@@ -14,4 +15,6 @@ export interface IOffers {
   offersId?: number;
 }
 
-export const defaultValue: Readonly<IOffers> = {};
+export const defaultValue: Readonly<IOffers> = {
+  available: false
+};

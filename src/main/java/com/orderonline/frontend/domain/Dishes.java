@@ -33,6 +33,10 @@ public class Dishes implements Serializable {
     private String description;
 
     @NotNull
+    @Column(name = "price", nullable = false)
+    private Double price;
+
+    @NotNull
     @Column(name = "available", nullable = false)
     private Boolean available;
 
@@ -99,6 +103,19 @@ public class Dishes implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public Dishes price(Double price) {
+        this.price = price;
+        return this;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public Boolean isAvailable() {
@@ -281,6 +298,7 @@ public class Dishes implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", description='" + getDescription() + "'" +
+            ", price=" + getPrice() +
             ", available='" + isAvailable() + "'" +
             ", image='" + getImage() + "'" +
             ", imageContentType='" + getImageContentType() + "'" +

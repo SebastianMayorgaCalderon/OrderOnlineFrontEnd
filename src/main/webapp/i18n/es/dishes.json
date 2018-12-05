@@ -17,6 +17,7 @@
       },
       "name": "Name",
       "description": "Description",
+      "price": "Price",
       "available": "Available",
       "image": "Image",
       "pricePerProduct": "Price Per Product",

@@ -32,6 +32,10 @@ public class Combos implements Serializable {
     @Column(name = "available", nullable = false)
     private Boolean available;
 
+    @NotNull
+    @Column(name = "price", nullable = false)
+    private Double price;
+
     @OneToMany(mappedBy = "productCombo")
     private Set<PricePerProduct> pricePerProducts = new HashSet<>();
     @ManyToMany
@@ -85,6 +89,19 @@ public class Combos implements Serializable {
 
     public void setAvailable(Boolean available) {
         this.available = available;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public Combos price(Double price) {
+        this.price = price;
+        return this;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public Set<PricePerProduct> getPricePerProducts() {
@@ -215,6 +232,7 @@ public class Combos implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", available='" + isAvailable() + "'" +
+            ", price=" + getPrice() +
             "}";
     }
 }

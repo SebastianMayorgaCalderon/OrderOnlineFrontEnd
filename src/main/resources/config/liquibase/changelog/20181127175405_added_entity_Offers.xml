@@ -37,6 +37,10 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="available" type="bit">
+                <constraints nullable="false" />
+            </column>
+
             <column name="restaurant_id" type="bigint">
                 <constraints nullable="true" />
             </column>

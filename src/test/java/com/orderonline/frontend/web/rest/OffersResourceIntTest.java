@@ -59,6 +59,9 @@ public class OffersResourceIntTest {
     private static final String DEFAULT_IMAGE_CONTENT_TYPE = "image/jpg";
     private static final String UPDATED_IMAGE_CONTENT_TYPE = "image/png";
 
+    private static final Boolean DEFAULT_AVAILABLE = false;
+    private static final Boolean UPDATED_AVAILABLE = true;
+
     @Autowired
     private OffersRepository offersRepository;
 
@@ -112,7 +115,8 @@ public class OffersResourceIntTest {
             .name(DEFAULT_NAME)
             .price(DEFAULT_PRICE)
             .image(DEFAULT_IMAGE)
-            .imageContentType(DEFAULT_IMAGE_CONTENT_TYPE);
+            .imageContentType(DEFAULT_IMAGE_CONTENT_TYPE)
+            .available(DEFAULT_AVAILABLE);
         return offers;
     }
 
@@ -141,6 +145,7 @@ public class OffersResourceIntTest {
         assertThat(testOffers.getPrice()).isEqualTo(DEFAULT_PRICE);
         assertThat(testOffers.getImage()).isEqualTo(DEFAULT_IMAGE);
         assertThat(testOffers.getImageContentType()).isEqualTo(DEFAULT_IMAGE_CONTENT_TYPE);
+        assertThat(testOffers.isAvailable()).isEqualTo(DEFAULT_AVAILABLE);
     }
 
     @Test
@@ -203,6 +208,25 @@ public class OffersResourceIntTest {
 
     @Test
     @Transactional
+    public void checkAvailableIsRequired() throws Exception {
+        int databaseSizeBeforeTest = offersRepository.findAll().size();
+        // set the field null
+        offers.setAvailable(null);
+
+        // Create the Offers, which fails.
+        OffersDTO offersDTO = offersMapper.toDto(offers);
+
+        restOffersMockMvc.perform(post("/api/offers")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(offersDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Offers> offersList = offersRepository.findAll();
+        assertThat(offersList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllOffers() throws Exception {
         // Initialize the database
         offersRepository.saveAndFlush(offers);
@@ -215,7 +239,8 @@ public class OffersResourceIntTest {
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].price").value(hasItem(DEFAULT_PRICE.doubleValue())))
             .andExpect(jsonPath("$.[*].imageContentType").value(hasItem(DEFAULT_IMAGE_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].image").value(hasItem(Base64Utils.encodeToString(DEFAULT_IMAGE))));
+            .andExpect(jsonPath("$.[*].image").value(hasItem(Base64Utils.encodeToString(DEFAULT_IMAGE))))
+            .andExpect(jsonPath("$.[*].available").value(hasItem(DEFAULT_AVAILABLE.booleanValue())));
     }
     
     @SuppressWarnings({"unchecked"})
@@ -265,7 +290,8 @@ public class OffersResourceIntTest {
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
             .andExpect(jsonPath("$.price").value(DEFAULT_PRICE.doubleValue()))
             .andExpect(jsonPath("$.imageContentType").value(DEFAULT_IMAGE_CONTENT_TYPE))
-            .andExpect(jsonPath("$.image").value(Base64Utils.encodeToString(DEFAULT_IMAGE)));
+            .andExpect(jsonPath("$.image").value(Base64Utils.encodeToString(DEFAULT_IMAGE)))
+            .andExpect(jsonPath("$.available").value(DEFAULT_AVAILABLE.booleanValue()));
     }
 
     @Test
@@ -292,7 +318,8 @@ public class OffersResourceIntTest {
             .name(UPDATED_NAME)
             .price(UPDATED_PRICE)
             .image(UPDATED_IMAGE)
-            .imageContentType(UPDATED_IMAGE_CONTENT_TYPE);
+            .imageContentType(UPDATED_IMAGE_CONTENT_TYPE)
+            .available(UPDATED_AVAILABLE);
         OffersDTO offersDTO = offersMapper.toDto(updatedOffers);
 
         restOffersMockMvc.perform(put("/api/offers")
@@ -308,6 +335,7 @@ public class OffersResourceIntTest {
         assertThat(testOffers.getPrice()).isEqualTo(UPDATED_PRICE);
         assertThat(testOffers.getImage()).isEqualTo(UPDATED_IMAGE);
         assertThat(testOffers.getImageContentType()).isEqualTo(UPDATED_IMAGE_CONTENT_TYPE);
+        assertThat(testOffers.isAvailable()).isEqualTo(UPDATED_AVAILABLE);
     }
 
     @Test
