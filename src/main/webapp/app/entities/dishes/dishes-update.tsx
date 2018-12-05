@@ -210,21 +210,6 @@ export class DishesUpdate extends React.Component<IDishesUpdateProps, IDishesUpd
                   </AvGroup>
                 </AvGroup>
                 <AvGroup>
-                  <Label for="restaurant.id">
-                    <Translate contentKey="orderOnlineFrontEndApp.dishes.restaurant">Restaurant</Translate>
-                  </Label>
-                  <AvInput id="dishes-restaurant" type="select" className="form-control" name="restaurantId">
-                    <option value="" key="0" />
-                    {restaurants
-                      ? restaurants.map(otherEntity => (
-                          <option value={otherEntity.id} key={otherEntity.id}>
-                            {otherEntity.id}
-                          </option>
-                        ))
-                      : null}
-                  </AvInput>
-                </AvGroup>
-                <AvGroup>
                   <Label for="category.name">
                     <Translate contentKey="orderOnlineFrontEndApp.dishes.category">Category</Translate>
                   </Label>
@@ -232,21 +217,6 @@ export class DishesUpdate extends React.Component<IDishesUpdateProps, IDishesUpd
                     <option value="" key="0" />
                     {categories
                       ? categories.map(otherEntity => (
-                          <option value={otherEntity.id} key={otherEntity.id}>
-                            {otherEntity.name}
-                          </option>
-                        ))
-                      : null}
-                  </AvInput>
-                </AvGroup>
-                <AvGroup>
-                  <Label for="dishes.name">
-                    <Translate contentKey="orderOnlineFrontEndApp.dishes.dishes">Dishes</Translate>
-                  </Label>
-                  <AvInput id="dishes-dishes" type="select" className="form-control" name="dishesId">
-                    <option value="" key="0" />
-                    {orders
-                      ? orders.map(otherEntity => (
                           <option value={otherEntity.id} key={otherEntity.id}>
                             {otherEntity.name}
                           </option>

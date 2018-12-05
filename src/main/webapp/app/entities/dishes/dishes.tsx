@@ -92,13 +92,7 @@ export class Dishes extends React.Component<IDishesProps, IDishesState> {
                   <Translate contentKey="orderOnlineFrontEndApp.dishes.image">Image</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
-                  <Translate contentKey="orderOnlineFrontEndApp.dishes.restaurant">Restaurant</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th>
                   <Translate contentKey="orderOnlineFrontEndApp.dishes.category">Category</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th>
-                  <Translate contentKey="orderOnlineFrontEndApp.dishes.dishes">Dishes</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -114,7 +108,7 @@ export class Dishes extends React.Component<IDishesProps, IDishesState> {
                   <td>{dishes.name}</td>
                   <td>{dishes.description}</td>
                   <td>{dishes.price}</td>
-                  <td>{dishes.available ? 'true' : 'false'}</td>
+                  <td>{dishes.available ? 'Si' : 'No'}</td>
                   <td>
                     {dishes.image ? (
                       <div>
@@ -128,9 +122,7 @@ export class Dishes extends React.Component<IDishesProps, IDishesState> {
                       </div>
                     ) : null}
                   </td>
-                  <td>{dishes.restaurantId ? <Link to={`restaurant/${dishes.restaurantId}`}>{dishes.restaurantId}</Link> : ''}</td>
                   <td>{dishes.categoryName ? <Link to={`category/${dishes.categoryId}`}>{dishes.categoryName}</Link> : ''}</td>
-                  <td>{dishes.dishesName ? <Link to={`orders/${dishes.dishesId}`}>{dishes.dishesName}</Link> : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${dishes.id}`} color="info" size="sm">

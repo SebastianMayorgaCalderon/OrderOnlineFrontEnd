@@ -167,36 +167,6 @@ export class CombosUpdate extends React.Component<ICombosUpdateProps, ICombosUpd
                       : null}
                   </AvInput>
                 </AvGroup>
-                <AvGroup>
-                  <Label for="restaurant.id">
-                    <Translate contentKey="orderOnlineFrontEndApp.combos.restaurant">Restaurant</Translate>
-                  </Label>
-                  <AvInput id="combos-restaurant" type="select" className="form-control" name="restaurantId">
-                    <option value="" key="0" />
-                    {restaurants
-                      ? restaurants.map(otherEntity => (
-                          <option value={otherEntity.id} key={otherEntity.id}>
-                            {otherEntity.id}
-                          </option>
-                        ))
-                      : null}
-                  </AvInput>
-                </AvGroup>
-                <AvGroup>
-                  <Label for="combos.name">
-                    <Translate contentKey="orderOnlineFrontEndApp.combos.combos">Combos</Translate>
-                  </Label>
-                  <AvInput id="combos-combos" type="select" className="form-control" name="combosId">
-                    <option value="" key="0" />
-                    {orders
-                      ? orders.map(otherEntity => (
-                          <option value={otherEntity.id} key={otherEntity.id}>
-                            {otherEntity.name}
-                          </option>
-                        ))
-                      : null}
-                  </AvInput>
-                </AvGroup>
                 <Button tag={Link} id="cancel-save" to="/entity/combos" replace color="info">
                   <FontAwesomeIcon icon="arrow-left" />
                   &nbsp;

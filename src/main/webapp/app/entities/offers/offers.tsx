@@ -88,12 +88,6 @@ export class Offers extends React.Component<IOffersProps, IOffersState> {
                 <th className="hand" onClick={this.sort('available')}>
                   <Translate contentKey="orderOnlineFrontEndApp.offers.available">Available</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
-                <th>
-                  <Translate contentKey="orderOnlineFrontEndApp.offers.restaurant">Restaurant</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th>
-                  <Translate contentKey="orderOnlineFrontEndApp.offers.offers">Offers</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
                 <th />
               </tr>
             </thead>
@@ -120,9 +114,7 @@ export class Offers extends React.Component<IOffersProps, IOffersState> {
                       </div>
                     ) : null}
                   </td>
-                  <td>{offers.available ? 'true' : 'false'}</td>
-                  <td>{offers.restaurantId ? <Link to={`restaurant/${offers.restaurantId}`}>{offers.restaurantId}</Link> : ''}</td>
-                  <td>{offers.offersName ? <Link to={`orders/${offers.offersId}`}>{offers.offersName}</Link> : ''}</td>
+                  <td>{offers.available ? 'Si' : 'No'}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${offers.id}`} color="info" size="sm">

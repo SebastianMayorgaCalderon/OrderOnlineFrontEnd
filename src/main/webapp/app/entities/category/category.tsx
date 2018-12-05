@@ -54,7 +54,6 @@ export class Category extends React.Component<ICategoryProps, ICategoryState> {
     const { categoryList, match, totalItems } = this.props;
     return (
       <div>
-        {this.props.loggedUser ? JSON.stringify(this.props.loggedUser) : 'llllllllllllllllllllllllll'}
         <h2 id="category-heading">
           <Translate contentKey="orderOnlineFrontEndApp.category.home.title">Categories</Translate>
           <Link to={`${match.url}/new`} className="btn btn-primary float-right jh-create-entity" id="jh-create-entity">
