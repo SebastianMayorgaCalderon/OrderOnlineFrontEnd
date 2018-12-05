@@ -16,6 +16,13 @@
             ]
         },
         {
+            "fieldName": "price",
+            "fieldType": "Double",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
             "fieldName": "available",
             "fieldType": "Boolean",
             "fieldValidateRules": [

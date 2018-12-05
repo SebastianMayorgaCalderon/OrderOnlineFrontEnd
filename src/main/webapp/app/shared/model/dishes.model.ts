@@ -6,6 +6,7 @@ export interface IDishes {
   id?: number;
   name?: string;
   description?: string;
+  price?: number;
   available?: boolean;
   imageContentType?: string;
   image?: any;

@@ -49,6 +49,9 @@ public class DishesResourceIntTest {
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
 
+    private static final Double DEFAULT_PRICE = 1D;
+    private static final Double UPDATED_PRICE = 2D;
+
     private static final Boolean DEFAULT_AVAILABLE = false;
     private static final Boolean UPDATED_AVAILABLE = true;
 
@@ -103,6 +106,7 @@ public class DishesResourceIntTest {
         Dishes dishes = new Dishes()
             .name(DEFAULT_NAME)
             .description(DEFAULT_DESCRIPTION)
+            .price(DEFAULT_PRICE)
             .available(DEFAULT_AVAILABLE)
             .image(DEFAULT_IMAGE)
             .imageContentType(DEFAULT_IMAGE_CONTENT_TYPE);
@@ -132,6 +136,7 @@ public class DishesResourceIntTest {
         Dishes testDishes = dishesList.get(dishesList.size() - 1);
         assertThat(testDishes.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testDishes.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
+        assertThat(testDishes.getPrice()).isEqualTo(DEFAULT_PRICE);
         assertThat(testDishes.isAvailable()).isEqualTo(DEFAULT_AVAILABLE);
         assertThat(testDishes.getImage()).isEqualTo(DEFAULT_IMAGE);
         assertThat(testDishes.getImageContentType()).isEqualTo(DEFAULT_IMAGE_CONTENT_TYPE);
@@ -197,6 +202,25 @@ public class DishesResourceIntTest {
 
     @Test
     @Transactional
+    public void checkPriceIsRequired() throws Exception {
+        int databaseSizeBeforeTest = dishesRepository.findAll().size();
+        // set the field null
+        dishes.setPrice(null);
+
+        // Create the Dishes, which fails.
+        DishesDTO dishesDTO = dishesMapper.toDto(dishes);
+
+        restDishesMockMvc.perform(post("/api/dishes")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(dishesDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Dishes> dishesList = dishesRepository.findAll();
+        assertThat(dishesList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void checkAvailableIsRequired() throws Exception {
         int databaseSizeBeforeTest = dishesRepository.findAll().size();
         // set the field null
@@ -227,6 +251,7 @@ public class DishesResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(dishes.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
+            .andExpect(jsonPath("$.[*].price").value(hasItem(DEFAULT_PRICE.doubleValue())))
             .andExpect(jsonPath("$.[*].available").value(hasItem(DEFAULT_AVAILABLE.booleanValue())))
             .andExpect(jsonPath("$.[*].imageContentType").value(hasItem(DEFAULT_IMAGE_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].image").value(hasItem(Base64Utils.encodeToString(DEFAULT_IMAGE))));
@@ -245,6 +270,7 @@ public class DishesResourceIntTest {
             .andExpect(jsonPath("$.id").value(dishes.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
+            .andExpect(jsonPath("$.price").value(DEFAULT_PRICE.doubleValue()))
             .andExpect(jsonPath("$.available").value(DEFAULT_AVAILABLE.booleanValue()))
             .andExpect(jsonPath("$.imageContentType").value(DEFAULT_IMAGE_CONTENT_TYPE))
             .andExpect(jsonPath("$.image").value(Base64Utils.encodeToString(DEFAULT_IMAGE)));
@@ -273,6 +299,7 @@ public class DishesResourceIntTest {
         updatedDishes
             .name(UPDATED_NAME)
             .description(UPDATED_DESCRIPTION)
+            .price(UPDATED_PRICE)
             .available(UPDATED_AVAILABLE)
             .image(UPDATED_IMAGE)
             .imageContentType(UPDATED_IMAGE_CONTENT_TYPE);
@@ -289,6 +316,7 @@ public class DishesResourceIntTest {
         Dishes testDishes = dishesList.get(dishesList.size() - 1);
         assertThat(testDishes.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testDishes.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
+        assertThat(testDishes.getPrice()).isEqualTo(UPDATED_PRICE);
         assertThat(testDishes.isAvailable()).isEqualTo(UPDATED_AVAILABLE);
         assertThat(testDishes.getImage()).isEqualTo(UPDATED_IMAGE);
         assertThat(testDishes.getImageContentType()).isEqualTo(UPDATED_IMAGE_CONTENT_TYPE);

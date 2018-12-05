@@ -17,6 +17,7 @@
       },
       "name": "Name",
       "available": "Available",
+      "price": "Price",
       "pricePerProduct": "Price Per Product",
       "dishes": "Dishes",
       "restaurant": "Restaurant",

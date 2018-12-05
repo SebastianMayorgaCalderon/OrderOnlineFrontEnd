@@ -65,13 +65,22 @@ export class Combos extends React.Component<ICombosProps, ICombosState> {
             <thead>
               <tr>
                 <th className="hand" onClick={this.sort('id')}>
-                  ID <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="global.field.id">ID</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={this.sort('name')}>
-                  Nombre <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="orderOnlineFrontEndApp.combos.name">Name</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={this.sort('available')}>
-                  Disponible <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="orderOnlineFrontEndApp.combos.available">Available</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th className="hand" onClick={this.sort('price')}>
+                  <Translate contentKey="orderOnlineFrontEndApp.combos.price">Price</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="orderOnlineFrontEndApp.combos.restaurant">Restaurant</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="orderOnlineFrontEndApp.combos.combos">Combos</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -85,8 +94,10 @@ export class Combos extends React.Component<ICombosProps, ICombosState> {
                     </Button>
                   </td>
                   <td>{combos.name}</td>
-                  <td>{combos.available ? 'Disponible' : 'No disponible'}</td>
-
+                  <td>{combos.available ? 'true' : 'false'}</td>
+                  <td>{combos.price}</td>
+                  <td>{combos.restaurantId ? <Link to={`restaurant/${combos.restaurantId}`}>{combos.restaurantId}</Link> : ''}</td>
+                  <td>{combos.combosName ? <Link to={`orders/${combos.combosId}`}>{combos.combosName}</Link> : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${combos.id}`} color="info" size="sm">

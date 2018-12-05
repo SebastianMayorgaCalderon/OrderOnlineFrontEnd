@@ -124,7 +124,7 @@ export class OffersUpdate extends React.Component<IOffersUpdateProps, IOffersUpd
                 ) : null}
                 <AvGroup>
                   <Label id="nameLabel" for="name">
-                    Nombre
+                    <Translate contentKey="orderOnlineFrontEndApp.offers.name">Name</Translate>
                   </Label>
                   <AvField
                     id="offers-name"
@@ -137,7 +137,7 @@ export class OffersUpdate extends React.Component<IOffersUpdateProps, IOffersUpd
                 </AvGroup>
                 <AvGroup>
                   <Label id="priceLabel" for="price">
-                    Precio
+                    <Translate contentKey="orderOnlineFrontEndApp.offers.price">Price</Translate>
                   </Label>
                   <AvField
                     id="offers-price"
@@ -153,13 +153,13 @@ export class OffersUpdate extends React.Component<IOffersUpdateProps, IOffersUpd
                 <AvGroup>
                   <AvGroup>
                     <Label id="imageLabel" for="image">
-                      Imagen
+                      <Translate contentKey="orderOnlineFrontEndApp.offers.image">Image</Translate>
                     </Label>
                     <br />
                     {image ? (
                       <div>
                         <a onClick={openFile(imageContentType, image)}>
-                          Abrir
+                          <Translate contentKey="entity.action.open">Open</Translate>
                         </a>
                         <br />
                         <Row>
@@ -181,8 +181,14 @@ export class OffersUpdate extends React.Component<IOffersUpdateProps, IOffersUpd
                   </AvGroup>
                 </AvGroup>
                 <AvGroup>
+                  <Label id="availableLabel" check>
+                    <AvInput id="offers-available" type="checkbox" className="form-control" name="available" />
+                    <Translate contentKey="orderOnlineFrontEndApp.offers.available">Available</Translate>
+                  </Label>
+                </AvGroup>
+                <AvGroup>
                   <Label for="dishes">
-                    ¿Posee platillos?
+                    <Translate contentKey="orderOnlineFrontEndApp.offers.dishes">Dishes</Translate>
                   </Label>
                   <AvInput
                     id="offers-dishes"
@@ -204,7 +210,7 @@ export class OffersUpdate extends React.Component<IOffersUpdateProps, IOffersUpd
                 </AvGroup>
                 <AvGroup>
                   <Label for="combos">
-                  ¿Posee algún combo?
+                    <Translate contentKey="orderOnlineFrontEndApp.offers.combos">Combos</Translate>
                   </Label>
                   <AvInput
                     id="offers-combos"
@@ -217,6 +223,36 @@ export class OffersUpdate extends React.Component<IOffersUpdateProps, IOffersUpd
                     <option value="" key="0" />
                     {combos
                       ? combos.map(otherEntity => (
+                          <option value={otherEntity.id} key={otherEntity.id}>
+                            {otherEntity.name}
+                          </option>
+                        ))
+                      : null}
+                  </AvInput>
+                </AvGroup>
+                <AvGroup>
+                  <Label for="restaurant.id">
+                    <Translate contentKey="orderOnlineFrontEndApp.offers.restaurant">Restaurant</Translate>
+                  </Label>
+                  <AvInput id="offers-restaurant" type="select" className="form-control" name="restaurantId">
+                    <option value="" key="0" />
+                    {restaurants
+                      ? restaurants.map(otherEntity => (
+                          <option value={otherEntity.id} key={otherEntity.id}>
+                            {otherEntity.id}
+                          </option>
+                        ))
+                      : null}
+                  </AvInput>
+                </AvGroup>
+                <AvGroup>
+                  <Label for="offers.name">
+                    <Translate contentKey="orderOnlineFrontEndApp.offers.offers">Offers</Translate>
+                  </Label>
+                  <AvInput id="offers-offers" type="select" className="form-control" name="offersId">
+                    <option value="" key="0" />
+                    {orders
+                      ? orders.map(otherEntity => (
                           <option value={otherEntity.id} key={otherEntity.id}>
                             {otherEntity.name}
                           </option>

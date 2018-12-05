@@ -93,7 +93,7 @@ export class CombosUpdate extends React.Component<ICombosUpdateProps, ICombosUpd
         <Row className="justify-content-center">
           <Col md="8">
             <h2 id="orderOnlineFrontEndApp.combos.home.createOrEditLabel">
-              Crear o edición del combo
+              <Translate contentKey="orderOnlineFrontEndApp.combos.home.createOrEditLabel">Create or edit a Combos</Translate>
             </h2>
           </Col>
         </Row>
@@ -113,7 +113,7 @@ export class CombosUpdate extends React.Component<ICombosUpdateProps, ICombosUpd
                 ) : null}
                 <AvGroup>
                   <Label id="nameLabel" for="name">
-                    Nombre
+                    <Translate contentKey="orderOnlineFrontEndApp.combos.name">Name</Translate>
                   </Label>
                   <AvField
                     id="combos-name"
@@ -127,12 +127,27 @@ export class CombosUpdate extends React.Component<ICombosUpdateProps, ICombosUpd
                 <AvGroup>
                   <Label id="availableLabel" check>
                     <AvInput id="combos-available" type="checkbox" className="form-control" name="available" />
-                    Disponible
+                    <Translate contentKey="orderOnlineFrontEndApp.combos.available">Available</Translate>
                   </Label>
                 </AvGroup>
                 <AvGroup>
+                  <Label id="priceLabel" for="price">
+                    <Translate contentKey="orderOnlineFrontEndApp.combos.price">Price</Translate>
+                  </Label>
+                  <AvField
+                    id="combos-price"
+                    type="string"
+                    className="form-control"
+                    name="price"
+                    validate={{
+                      required: { value: true, errorMessage: translate('entity.validation.required') },
+                      number: { value: true, errorMessage: translate('entity.validation.number') }
+                    }}
+                  />
+                </AvGroup>
+                <AvGroup>
                   <Label for="dishes">
-                    ¿Que platillos o productos posee el combo? (Para seleccionar mas platillos, presione ctrl + click izquierdo)
+                    <Translate contentKey="orderOnlineFrontEndApp.combos.dishes">Dishes</Translate>
                   </Label>
                   <AvInput
                     id="combos-dishes"
@@ -145,6 +160,36 @@ export class CombosUpdate extends React.Component<ICombosUpdateProps, ICombosUpd
                     <option value="" key="0" />
                     {dishes
                       ? dishes.map(otherEntity => (
+                          <option value={otherEntity.id} key={otherEntity.id}>
+                            {otherEntity.name}
+                          </option>
+                        ))
+                      : null}
+                  </AvInput>
+                </AvGroup>
+                <AvGroup>
+                  <Label for="restaurant.id">
+                    <Translate contentKey="orderOnlineFrontEndApp.combos.restaurant">Restaurant</Translate>
+                  </Label>
+                  <AvInput id="combos-restaurant" type="select" className="form-control" name="restaurantId">
+                    <option value="" key="0" />
+                    {restaurants
+                      ? restaurants.map(otherEntity => (
+                          <option value={otherEntity.id} key={otherEntity.id}>
+                            {otherEntity.id}
+                          </option>
+                        ))
+                      : null}
+                  </AvInput>
+                </AvGroup>
+                <AvGroup>
+                  <Label for="combos.name">
+                    <Translate contentKey="orderOnlineFrontEndApp.combos.combos">Combos</Translate>
+                  </Label>
+                  <AvInput id="combos-combos" type="select" className="form-control" name="combosId">
+                    <option value="" key="0" />
+                    {orders
+                      ? orders.map(otherEntity => (
                           <option value={otherEntity.id} key={otherEntity.id}>
                             {otherEntity.name}
                           </option>

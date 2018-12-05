@@ -30,6 +30,10 @@
                 <constraints nullable="false" />
             </column>
 
+            <column name="price" type="double">
+                <constraints nullable="false" />
+            </column>
+
             <column name="restaurant_id" type="bigint">
                 <constraints nullable="true" />
             </column>

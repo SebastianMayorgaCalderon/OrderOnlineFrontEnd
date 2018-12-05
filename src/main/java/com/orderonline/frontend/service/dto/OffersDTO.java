@@ -24,6 +24,9 @@ public class OffersDTO implements Serializable {
     private byte[] image;
     private String imageContentType;
 
+    @NotNull
+    private Boolean available;
+
     private Set<DishesDTO> dishes = new HashSet<>();
 
     private Set<CombosDTO> combos = new HashSet<>();
@@ -72,6 +75,14 @@ public class OffersDTO implements Serializable {
 
     public void setImageContentType(String imageContentType) {
         this.imageContentType = imageContentType;
+    }
+
+    public Boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(Boolean available) {
+        this.available = available;
     }
 
     public Set<DishesDTO> getDishes() {
@@ -142,6 +153,7 @@ public class OffersDTO implements Serializable {
             ", name='" + getName() + "'" +
             ", price=" + getPrice() +
             ", image='" + getImage() + "'" +
+            ", available='" + isAvailable() + "'" +
             ", restaurant=" + getRestaurantId() +
             ", offers=" + getOffersId() +
             ", offers='" + getOffersName() + "'" +
